@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Simbol Pasar Siti Khadijah">
+  <path fill="#21372D" d="M22 3h20l19 19v20L42 61H22L3 42V22z"/>
+  <path fill="#F5B642" d="M24 9h16l15 15v16L40 55H24L9 40V24z"/>
+  <path fill="#FFF5E7" d="M27 15h10l12 12v10L37 49H27L15 37V27z"/>
+  <path fill="#6D966B" d="M31 19h2v26h-2zM19 31h26v2H19z"/>
+  <path fill="#C84A3E" d="m32 22 10 10-10 10-10-10z"/>
+  <circle cx="32" cy="32" r="5" fill="#FFF5E7"/>
+</svg>

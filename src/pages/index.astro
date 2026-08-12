@@ -1,0 +1,263 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const site = Astro.site;
+const canonical = site ? new URL('/', site).href : undefined;
+const address = 'Jalan Buluh Kubu, Bandar Kota Bharu, 15000 Kota Bharu, Kelantan, Malaysia';
+const mapLink = 'https://maps.app.goo.gl/huwoQdwEvCVvUktu6';
+const opening = ['Ahad','Isnin','Selasa','Rabu','Khamis','Jumaat','Sabtu'];
+
+const faqs = [
+  { q: 'Perlu beli tiket untuk masuk ke Pasar Siti Khadijah?', a: 'Kebiasaannya tiada tiket masuk untuk melawat pasar. Anda hanya membayar barangan, makanan atau perkhidmatan yang dibeli. Polisi boleh berubah, jadi semak papan tanda di lokasi jika ada acara khas.' },
+  { q: 'Pukul berapa pasar dibuka?', a: 'Waktu rujukan semasa yang dipaparkan pada perkhidmatan navigasi ialah sekitar 7:30 pagi hingga 5:30 petang setiap hari. Waktu operasi boleh berubah pada cuti atau keadaan tertentu; semak semula sebelum bergerak.' },
+  { q: 'Bila masa paling sesuai untuk datang?', a: 'Datang pada awal pagi, kira-kira 7:30 hingga 10:30, jika anda mahu suasana pasar yang aktif, pilihan hasil segar yang lebih banyak dan cahaya yang baik di ruang atrium.' },
+  { q: 'Berapa lama sesuai diperuntukkan?', a: 'Sekitar 1 hingga 2 jam selesa untuk melihat beberapa aras, mencuba makanan Kelantan dan membeli buah tangan. Tambah masa jika anda mahu singgah ke muzium serta bangunan warisan di pusat bandar.' },
+  { q: 'Ada tempat letak kereta?', a: 'Terdapat petak parkir jalan dan parkir bandar di sekitar pusat Kota Bharu, tetapi ruang berhampiran pasar boleh cepat penuh ketika waktu sibuk. Ikut papan tanda bayaran setempat dan pertimbangkan parkir sedikit jauh kemudian berjalan kaki.' },
+  { q: 'Apa makanan yang patut dicuba?', a: 'Cari hidangan dan kudapan Kelantan seperti nasi kerabu, laksam, akok, serunding dan kuih-muih tempatan. Pilihan berubah mengikut gerai dan masa.' },
+];
+
+const attractionJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': ['TouristAttraction', 'LocalBusiness'],
+  name: 'Pasar Besar Siti Khadijah',
+  alternateName: 'Pasar Siti Khadijah Kota Bharu',
+  description: 'Pasar tradisional bertingkat di pusat Kota Bharu yang terkenal dengan ruang atrium oktagon, peniaga tempatan, hasil segar, makanan Kelantan dan barangan kraftangan.',
+  ...(canonical ? { url: canonical } : {}),
+  image: site ? [
+    new URL('/images/pasar-atrium.webp', site).href,
+    new URL('/images/peniaga-wanita.webp', site).href,
+    new URL('/images/luar-pasar.webp', site).href,
+  ] : undefined,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Jalan Buluh Kubu, Bandar Kota Bharu',
+    postalCode: '15000',
+    addressLocality: 'Kota Bharu',
+    addressRegion: 'Kelantan',
+    addressCountry: 'MY',
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: 6.1300891, longitude: 102.23925 },
+  hasMap: mapLink,
+  openingHoursSpecification: opening.map((day) => ({
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: `https://schema.org/${({Ahad:'Sunday',Isnin:'Monday',Selasa:'Tuesday',Rabu:'Wednesday',Khamis:'Thursday',Jumaat:'Friday',Sabtu:'Saturday'} as Record<string,string>)[day]}`,
+    opens: '07:30',
+    closes: '17:30',
+  })),
+  aggregateRating: { '@type': 'AggregateRating', ratingValue: 4.2, bestRating: 5 },
+  priceRange: 'RM',
+  isAccessibleForFree: true,
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(({q,a}) => ({
+    '@type': 'Question', name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
+---
+<BaseLayout
+  title="Pasar Siti Khadijah Kota Bharu | Panduan Lawatan"
+  description="Panduan tempatan Pasar Siti Khadijah di Kota Bharu: waktu operasi, makanan Kelantan, parkir, pengangkutan, tarikan sekitar dan tip masa terbaik untuk melawat."
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(attractionJsonLd)}></script>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(faqJsonLd)}></script>
+
+  <header class="sticky top-0 z-50 border-b border-[#21372d]/10 bg-[#fff6e8]/95 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-3 lg:px-8">
+      <a href="#atas" class="shrink-0" aria-label="Pasar Siti Khadijah — ke atas">
+        <img src="/logo.svg" width="430" height="88" alt="Pasar Siti Khadijah, Kota Bharu" class="h-12 w-auto" />
+      </a>
+      <nav aria-label="Navigasi utama" class="hidden items-center gap-5 text-sm font-bold lg:flex">
+        <a class="hover:text-[#c84a3e]" href="#kenali">Kenali Pasar</a>
+        <a class="hover:text-[#c84a3e]" href="#makan">Makan</a>
+        <a class="hover:text-[#c84a3e]" href="#rancang">Rancang</a>
+        <a class="hover:text-[#c84a3e]" href="#sekitar">Sekitar</a>
+        <a class="hover:text-[#c84a3e]" href="#faq">FAQ</a>
+      </nav>
+      <a href={mapLink} target="_blank" rel="noopener" class="rounded-full bg-[#21372d] px-4 py-2.5 text-sm font-extrabold text-[#fff6e8] transition hover:-translate-y-0.5">Buka Peta ↗</a>
+    </div>
+  </header>
+
+  <main id="atas">
+    <section class="relative min-h-[84vh] overflow-hidden bg-[#21372d] text-[#fff6e8]">
+      <img src="/images/pasar-atrium.webp" width="1800" height="1196" alt="Ruang atrium bertingkat di Pasar Siti Khadijah" fetchpriority="high" class="absolute inset-0 h-full w-full object-cover opacity-55" />
+      <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,38,30,.94)_0%,rgba(20,38,30,.72)_46%,rgba(20,38,30,.22)_100%)]"></div>
+      <div class="absolute -right-24 -top-24 h-96 w-96 rotate-[22deg] border-[52px] border-[#f5b642]/30 octagon"></div>
+      <div class="relative mx-auto grid min-h-[84vh] max-w-7xl items-end px-5 py-16 lg:grid-cols-[1fr_.48fr] lg:px-8 lg:py-24">
+        <div class="max-w-3xl">
+          <div class="mb-5 inline-flex items-center gap-3 rounded-full border border-[#fff6e8]/30 bg-[#21372d]/50 px-4 py-2 text-sm font-bold backdrop-blur">
+            <span class="h-2.5 w-2.5 rounded-full bg-[#f5b642]"></span>Kota Bharu · Kelantan
+          </div>
+          <p class="section-kicker mb-4 text-[#f5b642]">Pasar, rasa & cerita tempatan</p>
+          <h1 class="max-w-4xl text-5xl font-black leading-[.98] tracking-[-.045em] sm:text-6xl lg:text-8xl">Masuk ke jantung <span class="text-[#f5b642]">Kota Bharu.</span></h1>
+          <p class="mt-7 max-w-2xl text-lg leading-8 text-[#fff6e8]/85 sm:text-xl">Pasar Siti Khadijah bukan sekadar tempat membeli-belah. Ia ialah pengalaman berlapis — hasil segar di bawah, makanan dan barangan tempatan di aras atas, semuanya mengelilingi atrium oktagon yang menjadi imej ikonik pasar.</p>
+          <div class="mt-9 flex flex-wrap gap-3">
+            <a href="#rancang" class="rounded-full bg-[#f5b642] px-6 py-3.5 font-black text-[#21372d] transition hover:-translate-y-0.5">Rancang lawatan</a>
+            <a href="#makan" class="rounded-full border border-[#fff6e8]/40 bg-white/10 px-6 py-3.5 font-black backdrop-blur transition hover:bg-white/15">Cari rasa Kelantan</a>
+          </div>
+        </div>
+        <div class="mt-12 grid grid-cols-2 gap-3 lg:mt-0 lg:grid-cols-1">
+          <div class="rounded-[2rem] border border-white/20 bg-[#fff6e8]/10 p-5 backdrop-blur-md"><p class="text-xs font-black uppercase tracking-[.18em] text-[#f5b642]">Waktu rujukan</p><p class="mt-2 text-2xl font-black">07:30–17:30</p><p class="mt-1 text-sm text-white/70">Setiap hari · semak sebelum datang</p></div>
+          <div class="rounded-[2rem] border border-white/20 bg-[#fff6e8]/10 p-5 backdrop-blur-md"><p class="text-xs font-black uppercase tracking-[.18em] text-[#f5b642]">Cadangan masa</p><p class="mt-2 text-2xl font-black">1–2 jam</p><p class="mt-1 text-sm text-white/70">Lebih lama jika singgah muzium sekitar</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="kenali" class="market-grid py-20 lg:py-28">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="grid items-center gap-14 lg:grid-cols-2">
+          <div>
+            <p class="section-kicker text-[#7a3f68]">Kenali pasar</p>
+            <h2 class="mt-3 text-4xl font-black tracking-[-.035em] sm:text-5xl">Oktagon yang penuh warna, suara dan aroma.</h2>
+            <p class="mt-6 text-lg leading-8 text-[#21372d]/75">Pasar bertingkat ini terkenal dengan pandangan dari aras atas ke ruang niaga di tengah. Susun atur terbuka menjadikan hasil segar, rempah, makanan kering, kain dan kraftangan terasa seperti satu pentas besar kehidupan harian Kota Bharu.</p>
+            <div class="mt-8 grid gap-4 sm:grid-cols-3">
+              <div class="card rounded-3xl p-5"><div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[#f5b642] font-black">8</div><h3 class="font-black">Bentuk oktagon</h3><p class="mt-1 text-sm leading-6 text-[#21372d]/65">Motif seni bina yang memberi identiti tersendiri.</p></div>
+              <div class="card rounded-3xl p-5"><div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[#6d966b] text-xl">◒</div><h3 class="font-black">Berbilang aras</h3><p class="mt-1 text-sm leading-6 text-[#21372d]/65">Daripada hasil basah hingga barangan tempatan.</p></div>
+              <div class="card rounded-3xl p-5"><div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[#c84a3e] text-xl text-white">✦</div><h3 class="font-black">Budaya niaga</h3><p class="mt-1 text-sm leading-6 text-[#21372d]/65">Peniaga wanita menjadi wajah yang kuat di pasar ini.</p></div>
+            </div>
+          </div>
+          <figure class="relative mx-auto max-w-xl">
+            <div class="absolute -left-8 -top-8 h-32 w-32 border-[18px] border-[#7a3f68]/30 octagon"></div>
+            <img src="/images/peniaga-wanita.webp" width="1800" height="2700" loading="lazy" alt="Peniaga wanita di Pasar Siti Khadijah" class="photo-frame relative aspect-[4/5] w-full rounded-[2.2rem] object-cover" />
+            <figcaption class="mt-5 text-sm leading-6 text-[#21372d]/65">Antara ciri yang sering dikaitkan dengan pasar ini ialah kehadiran ramai peniaga wanita — sepadan dengan nama Siti Khadijah, tokoh usahawan dalam sejarah Islam.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="makan" class="bg-[#f0d9b7] py-20 lg:py-28">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+          <div class="max-w-2xl"><p class="section-kicker text-[#c84a3e]">Makan sekitar pasar</p><h2 class="mt-3 text-4xl font-black tracking-[-.035em] sm:text-5xl">Datang dengan perut kosong.</h2><p class="mt-5 text-lg leading-8 text-[#21372d]/75">Gerai berubah dari semasa ke semasa, tetapi inilah rasa Kelantan yang berbaloi dicari di dalam pasar dan jalan sekitarnya.</p></div>
+          <span class="tag self-start rounded-full px-4 py-2 text-sm font-bold lg:self-auto">Bawa tunai kecil sebagai pilihan</span>
+        </div>
+        <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            ['Nasi kerabu','Nasi berwarna biru/herba dengan ulam, sambal dan lauk pilihan.','#7a3f68'],
+            ['Laksam','Gulungan mi beras lembut dengan kuah ikan bersantan yang kaya.','#6d966b'],
+            ['Akok','Kuih Kelantan bertekstur lembut, manis dan wangi telur serta gula Melaka.','#c84a3e'],
+            ['Serunding','Daging atau ikan yang dimasak kering berbumbu; mudah dibawa pulang.','#985a3d'],
+            ['Kuih-muih','Pilihan sarapan dan kudapan tradisional, paling menarik pada sebelah pagi.','#f5b642'],
+            ['Hasil tempatan','Buah, sayur, rempah dan bahan dapur yang memenuhi aras bawah dengan warna.','#21372d']
+          ].map(([name,desc,color]) => (
+            <article class="rounded-[1.8rem] border border-[#21372d]/15 bg-[#fff6e8]/75 p-6">
+              <div class="mb-5 h-3 w-16 rounded-full" style={`background:${color}`}></div><h3 class="text-xl font-black">{name}</h3><p class="mt-2 leading-7 text-[#21372d]/68">{desc}</p>
+            </article>
+          ))}
+        </div>
+        <div class="mt-10 rounded-[2rem] border border-[#21372d]/15 bg-[#fff6e8]/80 p-6 lg:p-8">
+          <div class="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+            <div><p class="section-kicker text-[#7a3f68]">Makan berdekatan</p><h3 class="mt-2 text-2xl font-black">Tiga singgahan mudah selepas pasar.</h3></div>
+            <p class="max-w-xl text-sm leading-6 text-[#21372d]/60">Nama premis dan operasi boleh berubah; semak peta sebelum bergerak.</p>
+          </div>
+          <div class="mt-6 grid gap-3 md:grid-cols-3">
+            <article class="rounded-2xl bg-white/65 p-5"><h4 class="font-black">Medan Selera Laman Siti Khadijah</h4><p class="mt-2 text-sm leading-6 text-[#21372d]/68">Pilihan paling dekat untuk singgah di zon Jalan Buluh Kubu, sesuai jika mahu terus makan selepas membeli-belah.</p></article>
+            <article class="rounded-2xl bg-white/65 p-5"><h4 class="font-black">Kedai Kopi Din Tokyo KB</h4><p class="mt-2 text-sm leading-6 text-[#21372d]/68">Kopitiam lama di Jalan Tok Hakim untuk sarapan ringkas, kopi dan suasana Kota Bharu yang santai.</p></article>
+            <article class="rounded-2xl bg-white/65 p-5"><h4 class="font-black">Nasi Kukus Zaeman</h4><p class="mt-2 text-sm leading-6 text-[#21372d]/68">Pilihan nasi kukus di pusat bandar, sesuai jika anda mahu hidangan lebih mengenyangkan selepas meneroka kawasan warisan.</p></article>
+          </div>
+        </div>
+
+        <div class="mt-12 grid gap-6 lg:grid-cols-[1.15fr_.85fr]">
+          <img src="/images/hasil-segar.webp" width="1800" height="1196" loading="lazy" alt="Hasil segar berwarna-warni di Pasar Siti Khadijah" class="h-[420px] w-full rounded-[2rem] object-cover" />
+          <div class="flex flex-col justify-center rounded-[2rem] bg-[#21372d] p-8 text-[#fff6e8] lg:p-10"><p class="section-kicker text-[#f5b642]">Cara menikmati</p><h3 class="mt-3 text-3xl font-black">Jangan kejar senarai. Ikut deria.</h3><p class="mt-4 leading-7 text-white/75">Mulakan di aras bawah, lihat apa yang sedang segar, kemudian naik perlahan-lahan. Tanya harga dengan sopan, beri ruang kepada peniaga, dan pilih apa yang benar-benar menarik pada hari anda datang.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="rancang" class="py-20 lg:py-28">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <p class="section-kicker text-[#6d966b]">Rancang lawatan</p>
+        <h2 class="mt-3 max-w-3xl text-4xl font-black tracking-[-.035em] sm:text-5xl">Maklumat praktikal, tanpa teka-teki.</h2>
+        <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <article class="card rounded-[2rem] p-6"><span class="text-3xl">◷</span><h3 class="mt-5 text-xl font-black">Waktu operasi</h3><p class="mt-2 leading-7 text-[#21372d]/70">Rujukan navigasi semasa: <strong>07:30–17:30 setiap hari</strong>. Cuti, Ramadan atau acara setempat boleh mempengaruhi operasi gerai.</p></article>
+          <article class="card rounded-[2rem] p-6"><span class="text-3xl">RM</span><h3 class="mt-5 text-xl font-black">Tiket / bayaran</h3><p class="mt-2 leading-7 text-[#21372d]/70"><strong>Tiada tiket masuk lazimnya dikenakan.</strong> Bajet anda bergantung pada makanan dan belian. Harga setiap gerai berbeza.</p></article>
+          <article class="card rounded-[2rem] p-6"><span class="text-3xl">☀</span><h3 class="mt-5 text-xl font-black">Masa terbaik</h3><p class="mt-2 leading-7 text-[#21372d]/70"><strong>Awal pagi, 07:30–10:30</strong> ialah cadangan terbaik untuk suasana aktif, hasil segar dan keadaan yang lebih nyaman.</p></article>
+          <article class="card rounded-[2rem] p-6"><span class="text-3xl">⌛</span><h3 class="mt-5 text-xl font-black">Tempoh lawatan</h3><p class="mt-2 leading-7 text-[#21372d]/70">Peruntukkan <strong>1–2 jam</strong> untuk meneroka beberapa aras, makan dan membeli buah tangan tanpa tergesa-gesa.</p></article>
+        </div>
+
+        <div class="mt-16 grid gap-12 lg:grid-cols-2">
+          <div>
+            <p class="section-kicker text-[#c84a3e]">Pengangkutan terperinci</p>
+            <h3 class="mt-3 text-3xl font-black">Cara sampai ke Jalan Buluh Kubu.</h3>
+            <div class="mt-7 space-y-6">
+              <div class="flex gap-4"><div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#f5b642] font-black">1</div><div><h4 class="font-black">Dari Lapangan Terbang Sultan Ismail Petra</h4><p class="mt-1 leading-7 text-[#21372d]/70">E-hailing atau teksi ialah pilihan paling terus. Tourism Malaysia meletakkan perjalanan ke kawasan pasar sekitar setengah jam; masa sebenar bergantung trafik.</p></div></div>
+              <div class="flex gap-4"><div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#6d966b] font-black text-white">2</div><div><h4 class="font-black">Dengan kereta api</h4><p class="mt-1 leading-7 text-[#21372d]/70">Stesen yang melayani Kota Bharu berada di Wakaf Bharu. Dari stesen, sambung dengan teksi atau e-hailing ke pusat bandar dan Jalan Buluh Kubu.</p></div></div>
+              <div class="flex gap-4"><div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#c84a3e] font-black text-white">3</div><div><h4 class="font-black">Jika sudah di pusat Kota Bharu</h4><p class="mt-1 leading-7 text-[#21372d]/70">Pasar berada dalam kawasan pusat bandar yang padat dengan kedai dan tarikan warisan. Berjalan kaki sesuai jika penginapan anda berdekatan; e-hailing memudahkan jika cuaca panas atau hujan.</p></div></div>
+            </div>
+          </div>
+          <div class="rounded-[2.2rem] bg-[#7a3f68] p-8 text-[#fff6e8] lg:p-10">
+            <p class="section-kicker text-[#f5b642]">Parkir</p><h3 class="mt-3 text-3xl font-black">Parkir awal, berjalan sedikit.</h3>
+            <p class="mt-5 leading-7 text-white/78">Petak parkir jalan dan parkir bandar terdapat di sekitar pusat Kota Bharu. Ruang paling dekat dengan pasar boleh penuh pada waktu sibuk. Ikut papan tanda tempatan untuk kadar/kaedah bayaran dan elakkan menghalang pintu kedai atau laluan penghantaran.</p>
+            <div class="mt-7 rounded-2xl bg-white/10 p-5"><p class="font-black">Tip praktikal</p><p class="mt-2 text-sm leading-6 text-white/75">Jika anda datang selepas waktu sarapan, pertimbangkan terus mencari ruang beberapa lorong dari pasar dan berjalan. Ia biasanya lebih tenang daripada berpusing mencari petak paling hampir.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-[#21372d] py-20 text-[#fff6e8] lg:py-28">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="grid gap-10 lg:grid-cols-[.7fr_1.3fr]">
+          <div><p class="section-kicker text-[#f5b642]">Lokasi</p><h2 class="mt-3 text-4xl font-black tracking-[-.035em]">Di tengah denyut Kota Bharu.</h2><p class="mt-5 leading-7 text-white/70">{address}</p><div class="mt-7"><a href={mapLink} target="_blank" rel="noopener" class="inline-flex rounded-full bg-[#f5b642] px-5 py-3 font-black text-[#21372d]">Arah di Google Maps ↗</a></div></div>
+          <div class="map-wrap overflow-hidden rounded-[2rem] border border-white/15 bg-white/10">
+            <iframe title="Peta Pasar Siti Khadijah" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=6.1300891%2C102.23925&hl=ms&output=embed"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sekitar" class="py-20 lg:py-28">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="grid gap-12 lg:grid-cols-[.9fr_1.1fr]">
+          <div><img src="/images/luar-pasar.webp" width="1800" height="1196" loading="lazy" alt="Bahagian luar Pasar Siti Khadijah di Kota Bharu" class="photo-frame-alt aspect-[4/3] w-full rounded-[2rem] object-cover" /></div>
+          <div>
+            <p class="section-kicker text-[#7a3f68]">Tarikan sekitar</p><h2 class="mt-3 text-4xl font-black tracking-[-.035em] sm:text-5xl">Sambung berjalan ke Kota Bharu lama.</h2>
+            <p class="mt-5 leading-8 text-[#21372d]/72">Pasar sesuai dijadikan titik mula untuk meneroka pusat bandar. Susun laluan berjalan kaki berdasarkan cuaca dan waktu operasi tempat lain.</p>
+            <div class="mt-7 grid gap-3 sm:grid-cols-2">
+              {[
+                ['Istana Jahar','Seni bina diraja dan pameran adat Kelantan.'],
+                ['Masjid Muhammadi','Masjid negeri yang penting dalam landskap bandar.'],
+                ['Kampung Kraftangan','Ruang untuk melihat warisan kraf dan budaya tempatan.'],
+                ['Muzium Perang / Bank Kerapu','Persinggahan sejarah berhampiran zon warisan.'],
+                ['Seni Jalanan Kota Bharu','Lorong mural untuk berjalan dan mengambil gambar.'],
+                ['Pintu Gerbang Kota Sultan Ismail Petra','Mercu bandar yang mudah digabungkan dalam laluan pusat kota.']
+              ].map(([name,desc],i) => <article class="rounded-2xl border border-[#21372d]/15 p-5"><span class="text-xs font-black text-[#c84a3e]">0{i+1}</span><h3 class="mt-2 font-black">{name}</h3><p class="mt-1 text-sm leading-6 text-[#21372d]/65">{desc}</p></article>)}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="bg-[#f0d9b7] py-20 lg:py-28">
+      <div class="mx-auto max-w-4xl px-5 lg:px-8">
+        <p class="section-kicker text-[#c84a3e]">FAQ · Soalan lazim</p><h2 class="mt-3 text-4xl font-black tracking-[-.035em] sm:text-5xl">Sebelum anda singgah.</h2>
+        <div class="mt-9 space-y-3">
+          {faqs.map((item, i) => (
+            <details class="group rounded-2xl border border-[#21372d]/15 bg-[#fff6e8]/80 p-5 open:bg-[#fff6e8]">
+              <summary class="flex cursor-pointer list-none items-start justify-between gap-5 font-black"><span>{item.q}</span><span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#21372d] text-[#fff6e8] transition group-open:rotate-45">+</span></summary>
+              <p class="mt-4 max-w-3xl pr-8 leading-7 text-[#21372d]/70">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="rounded-[2rem] border border-[#21372d]/15 bg-white/50 p-6 text-sm leading-6 text-[#21372d]/62">
+          <p class="font-black text-[#21372d]">Nota foto & data</p>
+          <p class="mt-2">Foto sebenar diproses dan disimpan secara tempatan dalam projek. Kredit: Marufish (CC BY-SA 2.0) untuk foto atrium/hasil pasar; yeowatzup (CC BY 2.0) untuk foto peniaga; CK Tan (CC BY 3.0) untuk foto luar pasar. Waktu operasi dan penilaian boleh berubah; semak sumber navigasi serta papan tanda di lokasi sebelum lawatan.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-[#21372d]/10 bg-[#21372d] text-[#fff6e8]">
+    <div class="mx-auto flex max-w-7xl flex-col gap-5 px-5 py-10 lg:flex-row lg:items-end lg:justify-between lg:px-8">
+      <div><img src="/logo.svg" width="430" height="88" alt="Pasar Siti Khadijah" class="h-12 w-auto brightness-0 invert" /><p class="mt-4 max-w-xl text-sm leading-6 text-white/62">Laman panduan ini ialah projek maklumat bebas dan bukan laman rasmi Pasar Siti Khadijah, pihak berkuasa tempatan atau Tourism Malaysia.</p></div>
+      <div class="flex flex-wrap gap-4 text-sm font-bold text-white/70"><a href="#atas">Atas ↑</a><a href="#rancang">Rancang</a><a href="#faq">FAQ</a><a href={mapLink} target="_blank" rel="noopener">Peta ↗</a></div>
+    </div>
+  </footer>
+</BaseLayout>

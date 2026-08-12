@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 88" role="img" aria-labelledby="title desc">
+  <title id="title">Pasar Siti Khadijah</title><desc id="desc">Logo berinspirasikan ruang tengah berbentuk oktagon pasar.</desc>
+  <g transform="translate(8 8)">
+    <path fill="#21372D" d="M25 0h22l25 25v22L47 72H25L0 47V25z"/>
+    <path fill="#F5B642" d="M27 7h18l20 20v18L45 65H27L7 45V27z"/>
+    <path fill="#FFF5E7" d="M30 14h12l16 16v12L42 58H30L14 42V30z"/>
+    <path fill="#6D966B" d="M35 18h2v36h-2zM18 35h36v2H18z"/>
+    <path fill="#C84A3E" d="m36 22 14 14-14 14-14-14z"/>
+    <circle cx="36" cy="36" r="7" fill="#FFF5E7"/>
+  </g>
+  <g fill="#21372D" font-family="Arial, Helvetica, sans-serif">
+    <text x="98" y="39" font-size="28" font-weight="800" letter-spacing=".3">PASAR SITI KHADIJAH</text>
+    <text x="99" y="62" font-size="14" font-weight="700" letter-spacing="3.4" fill="#7A3F68">KOTA BHARU · KELANTAN</text>
+  </g>
+</svg>

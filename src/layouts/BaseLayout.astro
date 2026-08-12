@@ -1,0 +1,40 @@
+---
+import '../styles/global.css';
+interface Props { title: string; description: string; }
+const { title, description } = Astro.props;
+const site = Astro.site;
+const canonical = site ? new URL(Astro.url.pathname, site).href : undefined;
+const ogImage = site ? new URL('/images/og-pasar-siti-khadijah.jpg', site).href : '/images/og-pasar-siti-khadijah.jpg';
+---
+<!doctype html>
+<html lang="ms">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#21372d" />
+    <title>{title}</title>
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ms_MY" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/icons/mark.svg" type="image/svg+xml" />
+    <link rel="icon" href="/icons/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/icons/favicon-16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" sizes="180x180" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HXM22WWPKP"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){window.dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-HXM22WWPKP');
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
