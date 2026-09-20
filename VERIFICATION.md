@@ -6,8 +6,10 @@
 - `packageManager` dipin kepada `pnpm@11.21.0` dan `.node-version` sepadan dengan `engines.node` (`24.19.0`).
 - `@astrojs/check@0.9.9` dalam lockfile mengisytiharkan peer TypeScript `^5.0.0 || ^6.0.0`; projek menggunakan TypeScript `6.0.3`.
 - Importer akar `pnpm-lock.yaml` sepadan dengan versi tepat dalam `package.json`.
-- Tiada `pnpm-workspace.yaml` kerana ini projek satu pakej.
-- `site` hanya ditetapkan melalui `SITE` dalam `astro.config.mjs`; apabila kosong, sitemap tidak diaktifkan dan canonical/`og:url` tidak dijana.
+- `pnpm-workspace.yaml` yang dijana pnpm mengandungi nilai boolean yang sah (`allowBuilds` untuk esbuild/sharp/workerd).
+- `site` hanya ditetapkan melalui `SITE` dalam `astro.config.mjs` dan kini diisi dengan `https://pasarkhadijahkb.com`, maka sitemap, canonical, `og:url` dan `hreflang` (termasuk `x-default`) dijana secara automatik.
+- Tiga versi bahasa (`/`, `/en/`, `/zh/`) berkongsi satu sumber fakta (`src/data/market.ts`) dan satu pembina JSON-LD (`src/lib/schema.ts`), jadi waktu operasi, alamat, telefon dan penilaian tidak boleh bercanggah.
+- `public/robots.txt` merujuk `https://pasarkhadijahkb.com/sitemap-index.xml`; paksaan HTTP → HTTPS bergantung pada tetapan Cloudflare **Always Use HTTPS**, manakala `public/_headers` menghantar HSTS.
 - Tiada sitemap manual dan tiada `lastmod` rekaan.
 - Tiada `example.com`, `localhost` atau `chrome-extension://` dalam sumber projek.
 - Semua imej utama, logo dan favicon disimpan secara tempatan; favicon tersedia dalam SVG, 16×16, 32×32 dan Apple Touch 180×180.

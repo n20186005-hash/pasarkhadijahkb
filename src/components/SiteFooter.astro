@@ -1,0 +1,65 @@
+---
+import { FACTS, LOCALES } from '../data/market';
+
+interface Props {
+  note: string;
+  langLabel: string;
+  mapLabel: string;
+  phoneLabel: string;
+  links: { href: string; label: string }[];
+}
+
+const { note, langLabel, mapLabel, phoneLabel, links } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+<footer class="border-t border-[#21372d]/10 bg-[#21372d] text-[#fff6e8]">
+  <div class="mx-auto grid max-w-7xl gap-8 px-5 py-10 lg:grid-cols-[1.2fr_.8fr] lg:px-8">
+    <div>
+      <img src="/logo.svg" width="430" height="88" alt="Pasar Siti Khadijah" class="h-12 w-auto brightness-0 invert" />
+      <p class="mt-4 max-w-xl text-sm leading-6 text-white/62">{note}</p>
+      <div class="mt-5 flex flex-wrap gap-3 text-sm font-bold">
+        <a
+          href={`tel:${FACTS.phone}`}
+          class="rounded-full bg-[#f5b642] px-4 py-2 font-extrabold text-[#21372d] transition hover:-translate-y-0.5"
+          >☎ {phoneLabel} · {FACTS.phoneDisplay}</a
+        >
+        <a
+          href={FACTS.mapLink}
+          target="_blank"
+          rel="noopener"
+          class="rounded-full border border-white/30 px-4 py-2 font-extrabold transition hover:bg-white/10">{mapLabel} ↗</a
+        >
+      </div>
+    </div>
+    <div class="flex flex-col gap-4">
+      <div class="flex flex-wrap gap-4 text-sm font-bold text-white/70">
+        {
+          links.map((item) => (
+            <a class="hover:text-[#f5b642]" href={item.href}>
+              {item.label}
+            </a>
+          ))
+        }
+      </div>
+      <div>
+        <p class="section-kicker text-[#f5b642]">{langLabel}</p>
+        <nav aria-label={langLabel} class="mt-3 flex flex-wrap gap-2 text-sm font-bold">
+          {
+            LOCALES.map((locale) => (
+              <a
+                href={locale.path}
+                aria-current={locale.path === currentPath ? 'page' : undefined}
+                class:list={[
+                  'rounded-full px-3 py-1.5',
+                  locale.path === currentPath ? 'bg-[#fff6e8] text-[#21372d]' : 'border border-white/25 text-white/75 hover:bg-white/10',
+                ]}
+              >
+                {locale.label}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+    </div>
+  </div>
+</footer>

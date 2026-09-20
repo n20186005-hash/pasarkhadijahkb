@@ -1,6 +1,14 @@
-# Pasar Siti Khadijah — Astro one-page guide
+# Pasar Siti Khadijah — panduan pelawat berbilang bahasa
 
-Laman satu halaman berbahasa Melayu untuk Pasar Besar Siti Khadijah, Kota Bharu, Kelantan.
+Panduan untuk Pasar Besar Siti Khadijah, Kota Bharu, Kelantan dalam tiga bahasa:
+
+| Laluan | Bahasa | `lang` |
+| --- | --- | --- |
+| `/` | Bahasa Melayu | `ms` |
+| `/en/` | English | `en` |
+| `/zh/` | 简体中文 | `zh-Hans` |
+
+Setiap halaman berkongsi fakta yang sama daripada `src/data/market.ts` dan skema JSON-LD yang dibina dalam `src/lib/schema.ts`, jadi waktu operasi, alamat, telefon serta penilaian tidak boleh bercanggah antara bahasa.
 
 ## Stack
 
@@ -19,7 +27,11 @@ Edit **hanya** nilai `SITE` dalam `astro.config.mjs`:
 const SITE = '';
 ```
 
-Biarkan kosong jika domain belum tersedia. Projek masih membina tanpa domain; canonical dan `og:url` akan diabaikan, manakala `og:image` menggunakan laluan relatif. Integrasi `@astrojs/sitemap` hanya diaktifkan apabila `SITE` mempunyai URL sebenar.
+Domain semasa: `https://pasarkhadijahkb.com`. Apabila `SITE` diisi, `astro.config.mjs` mengaktifkan `@astrojs/sitemap`, `BaseLayout.astro` mengeluarkan `canonical`, `og:url`, `hreflang` (termasuk `x-default` ke `/`) dan `public/robots.txt` boleh merujuk `sitemap-index.xml`. Jika domain ditukar, ubah `SITE` serta baris `Sitemap` dalam `public/robots.txt`.
+
+## HTTPS & HSTS
+
+Paksaan HTTP → HTTPS 301 dilakukan di Cloudflare (aktifkan **Always Use HTTPS** pada zon tersebut), bukan dalam kod. `public/_headers` menghantar HSTS dan beberapa header keselamatan tambahan untuk Static Assets.
 
 ## Pembangunan
 

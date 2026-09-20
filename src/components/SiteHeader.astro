@@ -1,0 +1,65 @@
+---
+import { FACTS, LOCALES } from '../data/market';
+
+interface NavItem {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  nav: NavItem[];
+  cta: string;
+  phoneLabel: string;
+  langLabel: string;
+}
+
+const { nav, cta, phoneLabel, langLabel } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+<header class="sticky top-0 z-50 border-b border-[#21372d]/10 bg-[#fff6e8]/95 backdrop-blur">
+  <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3 lg:px-8">
+    <a href="#atas" class="shrink-0" aria-label="Pasar Siti Khadijah — ke atas">
+      <img src="/logo.svg" width="430" height="88" alt="Pasar Siti Khadijah, Kota Bharu" class="h-11 w-auto" />
+    </a>
+    <nav aria-label={nav[0] ? 'Navigasi utama' : 'Navigasi'} class="hidden items-center gap-5 text-sm font-bold lg:flex">
+      {
+        nav.map((item) => (
+          <a class="hover:text-[#c84a3e]" href={item.href}>
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="flex items-center gap-2">
+      <nav aria-label={langLabel} class="hidden items-center gap-1 rounded-full border border-[#21372d]/15 bg-white/60 px-2 py-1 text-xs font-extrabold lg:flex">
+        {
+          LOCALES.map((locale) => (
+            <a
+              href={locale.path}
+              aria-current={locale.path === currentPath ? 'page' : undefined}
+              class:list={[
+                'rounded-full px-2.5 py-1',
+                locale.path === currentPath ? 'bg-[#21372d] text-[#fff6e8]' : 'text-[#21372d]/70 hover:text-[#c84a3e]',
+              ]}
+            >
+              {locale.short}
+            </a>
+          ))
+        }
+      </nav>
+      <a
+        href={`tel:${FACTS.phone}`}
+        aria-label={`${phoneLabel} ${FACTS.phoneDisplay}`}
+        class="flex h-11 w-11 items-center justify-center rounded-full bg-[#f5b642] text-xl text-[#21372d] transition hover:-translate-y-0.5 lg:hidden"
+        >☎</a
+      >
+      <a
+        href={FACTS.mapLink}
+        target="_blank"
+        rel="noopener"
+        class="rounded-full bg-[#21372d] px-4 py-2.5 text-sm font-extrabold text-[#fff6e8] transition hover:-translate-y-0.5"
+        >{cta}</a
+      >
+    </div>
+  </div>
+</header>
