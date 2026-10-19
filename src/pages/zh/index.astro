@@ -10,15 +10,15 @@ const site = Astro.site;
 const faqs = [
   {
     q: '西蒂卡迪嘉大巴刹几点开门？',
-    a: '参考营业时间约为每天上午 7:00，周五一班稍晚，约 7:30 才开始。想买到最新鲜的渔获与蔬果，建议清早前往。',
+    a: "2026年10月19日核对的 Google Maps 显示每天 07:30 开门；吉兰丹旅游官网列为 07:00。各摊位可能不同，请在出发前直接确认。",
   },
   {
     q: '几点关门 / 打烊？',
-    a: '多数摊位营业到下午 5:30 左右，也有资料列到傍晚 6:00。接近傍晚部分摊主会开始收摊，想要完整选择请早点来。',
+    a: "Google Maps 列为 17:30，吉兰丹旅游官网列为 18:00。不要假定所有摊位都营业至较晚时间；如有特别想逛的店，请先联系确认。",
   },
   {
     q: '巴刹星期几休息？',
-    a: '这里每天营业，包括周六与周日，没有固定的每周休市日。周五中午约 12:00 至 14:00 因主麻礼拜，交易节奏会明显放慢。',
+    a: "Google Maps 显示周一至周日营业。节假日、斋戒月及摊主休息可能影响个别摊位；尚未核实适用于所有摊位的周五统一休息时间。",
   },
   {
     q: '需要买门票吗？',
@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     q: '什么时段最适合来？',
-    a: '建议上午 7:00 至 10:00，人潮热络、货色最齐，八角中庭的光线也最适合拍照。',
+    a: "建议考虑上午08:00–10:00到访，体验早市；各摊位的营业时间与货源可能不同。",
   },
   {
     q: '建议停留多久？',
@@ -38,7 +38,7 @@ const faqs = [
   },
   {
     q: '有什么必吃美食？',
-    a: '可找 Nasi kerabu（蓝花椰浆饭）、Laksam（米卷配椰香鱼汤）、Akok（娘惹蒸糕）、Serunding（肉松）以及 jala mas、tahi itik 等传统马来糕点，实际供应随摊位与时段的变动。',
+    a: '可找 Nasi kerabu（蓝花椰浆饭）、Laksam（米卷配椰香鱼汤）、Akok（吉兰丹蛋糕点）、Serunding（肉松）以及 jala mas、tahi itik 等传统马来糕点，实际供应随摊位与时段的变动。',
   },
   {
     q: '可以刷卡或用电子钱包吗？',
@@ -47,7 +47,7 @@ const faqs = [
 ];
 
 const description =
-  '吉兰丹哥打峇鲁西蒂卡迪嘉大巴刹实用攻略：每日约 07:00–17:30 营业、Jalan Buluh Kubu 地址、电话 +60 17-914 6218、必吃美食、停车与周边景点一次看懂。';
+  "查看哥打峇鲁西蒂卡迪嘉大巴刹开门与打烊时间、地图和旅游官网的时间差异、Jalan Buluh Kubu 地址、食品购物分类、停车与实用到访建议。";
 
 const attractionJsonLd = buildAttraction({
   site,
@@ -55,12 +55,13 @@ const attractionJsonLd = buildAttraction({
   name: '西蒂卡迪嘉大巴刹',
   alternateName: 'Pasar Siti Khadijah Kota Bharu',
   description:
-    '位于哥打峇鲁市中心的楼层式传统巴刹，以八角形中庭、在地摊商、新鲜食材、吉兰丹美食与手工艺品闻名。',
+    '位于哥打峇鲁市中心的楼层式传统巴刹，以中央中庭、在地摊商、新鲜食材、吉兰丹美食与手工艺品闻名。',
 });
 
 const faqJsonLd = buildFaq(faqs);
 
 const nav = [
+  { href: '#directory', label: "购物分类" },
   { href: '#about', label: '认识巴刹' },
   { href: '#eat', label: '美食' },
   { href: '#plan', label: '规划' },
@@ -93,7 +94,7 @@ const around = [
   ['苏丹依斯迈·柏特拉城门', '市中心容易顺路安排的打卡地标。'],
 ];
 ---
-<BaseLayout lang="zh-Hans" title="西蒂卡迪嘉大巴刹｜哥打峇鲁营业时间、地址与美食攻略" description={description}>
+<BaseLayout lang="zh-Hans" title="西蒂卡迪嘉大巴刹｜营业时间、位置、美食与购物指南" description={description}>
   <script type="application/ld+json" is:inline set:html={JSON.stringify(attractionJsonLd)}></script>
   <script type="application/ld+json" is:inline set:html={JSON.stringify(faqJsonLd)}></script>
 
@@ -110,8 +111,8 @@ const around = [
             <span class="h-2.5 w-2.5 rounded-full bg-[#f5b642]"></span>哥打峇鲁 · 吉兰丹
           </div>
           <p class="section-kicker mb-4 text-[#f5b642]">巴刹、滋味与在地故事</p>
-          <h1 class="max-w-4xl text-5xl font-black leading-[.98] tracking-[-.045em] sm:text-6xl lg:text-8xl">走进<span class="text-[#f5b642]">哥打峇鲁</span>的心脏。</h1>
-          <p class="mt-7 max-w-2xl text-lg leading-8 text-[#fff6e8]/85 sm:text-xl">西蒂卡迪嘉大巴刹不只是买东西的地方，而是一段层层展开的体验：一楼是湿货与生鲜，楼上是美食与干货，全都围绕着这栋建筑最具代表性的八角形中庭。</p>
+          <h1 class="max-w-4xl text-4xl font-black leading-tight tracking-[-.035em] sm:text-5xl lg:text-7xl">西蒂卡迪嘉大巴刹 <span class="text-[#f5b642]">哥打峇鲁</span></h1>
+          <p class="mt-7 max-w-2xl text-lg leading-8 text-[#fff6e8]/85 sm:text-xl">西蒂卡迪嘉大巴刹不只是买东西的地方，而是一段层层展开的体验：一楼是湿货与生鲜，楼上是美食与干货，全都围绕着这栋建筑最具代表性的中央中庭。</p>
           <div class="mt-9 flex flex-wrap gap-3">
             <a href="#hours" class="rounded-full bg-[#f5b642] px-6 py-3.5 font-black text-[#21372d] transition hover:-translate-y-0.5">查看营业时间</a>
             <a href="#eat" class="rounded-full border border-[#fff6e8]/40 bg-white/10 px-6 py-3.5 font-black backdrop-blur transition hover:bg-white/15">吉兰丹滋味</a>
@@ -131,30 +132,33 @@ const around = [
           <div class="max-w-2xl">
             <p class="section-kicker text-[#6d966b]">营业时间</p>
             <h2 class="mt-2 text-3xl font-black tracking-[-.03em] sm:text-4xl">每天营业 · {FACTS.hours.display}</h2>
-            <p class="mt-3 leading-7 text-[#21372d]/72">周五通常约 7:30 才开始，中午约 12:00 至 14:00 因主麻礼拜而人潮转少。以上为参考时间，节庆、斋戒月、公共假期与整修工程都可能改变实际营业状况。</p>
+            <p class="mt-3 leading-7 text-[#21372d]/72">2026年10月19日核对：Google Maps 显示每天 07:30–17:30；吉兰丹旅游官网列为 07:00–18:00。各摊位实际营业时间可能不同，周五及节假日出发前建议直接确认。</p>
           </div>
           <div class="flex flex-wrap gap-3">
             <a href={`tel:${FACTS.phone}`} class="rounded-full bg-[#21372d] px-5 py-3.5 font-extrabold text-[#fff6e8] transition hover:-translate-y-0.5">☎ 拨打巴刹电话</a>
             <a href={FACTS.mapLink} target="_blank" rel="noopener" class="rounded-full bg-[#f5b642] px-5 py-3.5 font-extrabold text-[#21372d] transition hover:-translate-y-0.5">导航到 Jalan Buluh Kubu ↗</a>
           </div>
         </div>
+        <p class="mt-5 text-sm font-bold"><a class="underline" href={SOURCES.maps.url} target="_blank" rel="noopener">Google Maps 参考时间 · 核对于2026年10月19日</a> · <a class="underline" href={SOURCES.tourism.url} target="_blank" rel="noopener">Tourism Kelantan: 07:00–18:00</a></p>
         <dl class="mt-7 grid gap-3 sm:grid-cols-3">
-          <div class="card rounded-2xl p-4"><dt class="text-xs font-black uppercase tracking-[.16em] text-[#6d966b]">周一 – 周四</dt><dd class="mt-1 text-lg font-black">07:00 – 17:30</dd></div>
-          <div class="card rounded-2xl p-4"><dt class="text-xs font-black uppercase tracking-[.16em] text-[#7a3f68]">周五</dt><dd class="mt-1 text-lg font-black">07:30 – 17:30</dd><dd class="mt-1 text-sm text-[#21372d]/65">12:00–14:00 转少人</dd></div>
-          <div class="card rounded-2xl p-4"><dt class="text-xs font-black uppercase tracking-[.16em] text-[#c84a3e]">周六 – 周日</dt><dd class="mt-1 text-lg font-black">07:00 – 17:30</dd></div>
+          <div class="card rounded-2xl p-4"><dt class="text-xs font-black uppercase tracking-[.16em] text-[#6d966b]">周一 – 周四</dt><dd class="mt-1 text-lg font-black">{FACTS.hours.display}</dd></div>
+          <div class="card rounded-2xl p-4"><dt class="text-xs font-black uppercase tracking-[.16em] text-[#7a3f68]">周五</dt><dd class="mt-1 text-lg font-black">{FACTS.hours.display}</dd></div>
+          <div class="card rounded-2xl p-4"><dt class="text-xs font-black uppercase tracking-[.16em] text-[#c84a3e]">周六 – 周日</dt><dd class="mt-1 text-lg font-black">{FACTS.hours.display}</dd></div>
         </dl>
       </div>
     </section>
+
+    <section id="directory" class="mx-auto max-w-7xl px-5 py-12 lg:px-8"><h2 class="text-3xl font-black">巴刹购物分类指南</h2><p class="mt-4 max-w-3xl leading-7">以下按商品类型帮助规划行程；尚未核实最新租户名单或摊位编号，到场请参考指示牌并询问摊主。</p><div class="mt-6 grid gap-4 md:grid-cols-3"><article class="card rounded-2xl p-5"><h3 class="font-black">生鲜与食材</h3><p class="mt-2 leading-7">寻找蔬菜、水果及烹饪原料，按当天货源比较品质与价格。</p></article><article class="card rounded-2xl p-5"><h3 class="font-black">吉兰丹食品</h3><p class="mt-2 leading-7">寻找蓝花饭、传统糕点及干货，具体选择取决于当时营业的摊位。</p></article><article class="card rounded-2xl p-5"><h3 class="font-black">布料与伴手礼</h3><p class="mt-2 leading-7">寻找布料、手工艺及当地商品，购买前确认材质、尺寸与价格。</p></article></div></section>
 
     <section id="about" class="market-grid py-20 lg:py-28">
       <div class="mx-auto max-w-7xl px-5 lg:px-8">
         <div class="grid items-center gap-14 lg:grid-cols-2">
           <div>
             <p class="section-kicker text-[#7a3f68]">认识巴刹</p>
-            <h2 class="mt-3 text-4xl font-black tracking-[-.035em] sm:text-5xl">充满颜色、声音与香气的八角空间。</h2>
+            <h2 class="mt-3 text-4xl font-black tracking-[-.035em] sm:text-5xl">充满颜色、声音与香气的中庭空间。</h2>
             <p class="mt-6 text-lg leading-8 text-[#21372d]/75">从上层俯瞰中央交易区，是这座巴刹最著名的画面。开放式楼层把生鲜渔获、香料、干货、布料与手工艺品串成一座描绘哥打峇鲁日常生活的舞台。</p>
             <div class="mt-8 grid gap-4 sm:grid-cols-3">
-              <div class="card rounded-3xl p-5"><div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[#f5b642] font-black">8</div><h3 class="font-black">八角造型</h3><p class="mt-1 text-sm leading-6 text-[#21372d]/65">赋予巴刹独特辨识度的建筑语汇。</p></div>
+              <div class="card rounded-3xl p-5"><div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[#f5b642] font-black">◎</div><h3 class="font-black">市场建筑</h3><p class="mt-1 text-sm leading-6 text-[#21372d]/65">赋予巴刹独特辨识度的建筑语汇。</p></div>
               <div class="card rounded-3xl p-5"><div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[#6d966b] text-xl">◒</div><h3 class="font-black">多层配置</h3><p class="mt-1 text-sm leading-6 text-[#21372d]/65">从湿货一路逛到在地干货。</p></div>
               <div class="card rounded-3xl p-5"><div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[#c84a3e] text-xl text-white">✦</div><h3 class="font-black">娘子商道</h3><p class="mt-1 text-sm leading-6 text-[#21372d]/65">女性摊商是这里最鲜明的风景。</p></div>
             </div>
@@ -197,9 +201,9 @@ const around = [
         <p class="section-kicker text-[#6d966b]">规划行程</p>
         <h2 class="mt-3 max-w-3xl text-4xl font-black tracking-[-.035em] sm:text-5xl">实用信息，不用猜。</h2>
         <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          <article class="card rounded-[2rem] p-6"><span class="text-3xl">◷</span><h3 class="mt-5 text-xl font-black">营业时间</h3><p class="mt-2 leading-7 text-[#21372d]/70">参考时间：<strong>每天 {FACTS.hours.display}</strong>（周五约 07:30 开始）。另有资料列到傍晚 18:00，出发前请再查地图资讯与现场告示。</p></article>
+          <article class="card rounded-[2rem] p-6"><span class="text-3xl">◷</span><h3 class="mt-5 text-xl font-black">营业时间</h3><p class="mt-2 leading-7 text-[#21372d]/70">参考时间：<strong>每天 {FACTS.hours.display}</strong>（Google Maps）。吉兰丹旅游官网列为 07:00–18:00，出发前请再查地图资讯与现场告示。</p></article>
           <article class="card rounded-[2rem] p-6"><span class="text-3xl">RM</span><h3 class="mt-5 text-xl font-black">门票／付费</h3><p class="mt-2 leading-7 text-[#21372d]/70"><strong>一般不需门票。</strong>预算取决于用餐与购物，各摊位价格不同，建议携带小额现金。</p></article>
-          <article class="card rounded-[2rem] p-6"><span class="text-3xl">☀</span><h3 class="mt-5 text-xl font-black">最佳时段</h3><p class="mt-2 leading-7 text-[#21372d]/70"><strong>清早 07:00–10:00</strong> 最推荐：气氛热络、货色最齐，也比较凉快。</p></article>
+          <article class="card rounded-[2rem] p-6"><span class="text-3xl">☀</span><h3 class="mt-5 text-xl font-black">最佳时段</h3><p class="mt-2 leading-7 text-[#21372d]/70"><strong>清早 08:00–10:00</strong> 最推荐：气氛热络、货色最齐，也比较凉快。</p></article>
           <article class="card rounded-[2rem] p-6"><span class="text-3xl">⌛</span><h3 class="mt-5 text-xl font-black">停留时间</h3><p class="mt-2 leading-7 text-[#21372d]/70">安排 <strong>1–2 小时</strong>，可从容逛几个楼层、吃东西并采买伴手礼。</p></article>
         </div>
 
@@ -284,7 +288,7 @@ const around = [
       <div class="mx-auto max-w-7xl px-5 lg:px-8">
         <div class="rounded-[2rem] border border-[#21372d]/15 bg-white/50 p-6 text-sm leading-6 text-[#21372d]/62">
           <p class="font-black text-[#21372d]">评分、照片与资料来源说明</p>
-          <p class="mt-2">{FACTS.rating.value}/5 的评分与 {FACTS.rating.count.toLocaleString('zh-CN')} 则评论，同步自 <a class="font-bold underline" href={SOURCES.maps.url} target="_blank" rel="noopener">{SOURCES.maps.label}</a>（{FACTS.rating.synced}）。数字会随时间变动。</p>
+          <p class="mt-2">{FACTS.rating.value}/5 的评分与 {FACTS.rating.count.toLocaleString('zh-CN')} 则评论，核对自 <a class="font-bold underline" href={SOURCES.maps.url} target="_blank" rel="noopener">{SOURCES.maps.label}</a>（{FACTS.rating.synced}）。数字会随时间变动。</p>
           <p class="mt-2">营业时间参考 <a class="font-bold underline" href={SOURCES.hours.url} target="_blank" rel="noopener">{SOURCES.hours.label}</a>，并与 <a class="font-bold underline" href={SOURCES.tourism.url} target="_blank" rel="noopener">{SOURCES.tourism.label}</a> 交叉比对；节庆与公共假期前往前请务必再次确认。</p>
           <p class="mt-2">站内照片皆经处理后存放于专案中。图片来源：Marufish（CC BY-SA 2.0）、yeowatzup（CC BY 2.0）、CK Tan（CC BY 3.0）。</p>
         </div>

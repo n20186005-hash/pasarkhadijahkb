@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import { FACTS, HOURS_NOTE, SOURCES, photoCredits } from '../data/market';
+import { FACTS, SOURCES, photoCredits } from '../data/market';
 import { buildAttraction, buildFaq } from '../lib/schema';
 
 const site = Astro.site;
@@ -10,15 +10,15 @@ const site = Astro.site;
 const faqs = [
   {
     q: 'Pukul berapa Pasar Siti Khadijah dibuka?',
-    a: 'Rujukan semasa ialah sekitar 7:00 pagi setiap hari, dengan hari Jumaat lazimnya bermula sedikit lewat sekitar 7:30 pagi. Hasil segar paling lengkap pada awal pagi.',
+    a: "Semakan Google Maps pada 19 Oktober 2026 menyenaraikan 07:30 setiap hari. Tourism Kelantan pula menyatakan 07:00. Gerai boleh membuka pada waktu berbeza; semak terus sebelum bertolak.",
   },
   {
     q: 'Pukul berapa pasar ini tutup?',
-    a: 'Kebanyakan gerai beroperasi sehingga sekitar 5:30 petang. Menjelang lewat petang sesetengah peniaga mula mengemas, jadi datang lebih awal jika mahu pilihan yang penuh.',
+    a: "Google Maps menyenaraikan tutup 17:30, manakala Tourism Kelantan menyatakan 18:00. Jangan anggap semua gerai masih dibuka sehingga waktu terakhir; sahkan gerai yang ingin dikunjungi.",
   },
   {
     q: 'Pasar Siti Khadijah tutup pada hari apa?',
-    a: 'Pasar ini beroperasi setiap hari termasuk Sabtu dan Ahad, tanpa hari tutup mingguan yang tetap. Pada hari Jumaat aktiviti niaga biasanya perlahan kira-kira 12:00 tengah hari hingga 2:00 petang kerana solat Jumaat.',
+    a: "Google Maps menyenaraikan operasi Isnin hingga Ahad. Cuti umum, Ramadan dan waktu rehat peniaga boleh mempengaruhi gerai individu; tiada waktu rehat Jumaat seragam yang dapat disahkan.",
   },
   {
     q: 'Perlu beli tiket untuk masuk ke Pasar Siti Khadijah?',
@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     q: 'Bila masa paling sesuai untuk datang?',
-    a: 'Datang pada awal pagi, kira-kira 7:00 hingga 10:00, jika anda mahu suasana pasar yang aktif, pilihan hasil segar yang lebih banyak dan cahaya yang baik di ruang atrium.',
+    a: "Cadangan lawatan ialah sekitar 08:00–10:00 untuk melihat aktiviti pagi. Pilihan dan waktu gerai boleh berbeza.",
   },
   {
     q: 'Berapa lama sesuai diperuntukkan?',
@@ -47,7 +47,7 @@ const faqs = [
 ];
 
 const description =
-  'Pasar Siti Khadijah Kota Bharu dibuka setiap hari kira-kira 07:00–17:30. Panduan lokasi Jalan Buluh Kubu, telefon, makanan Kelantan, kraftangan, parkir dan tarikan sekitar.';
+  "Semak waktu buka dan tutup Pasar Siti Khadijah, perbezaan waktu pada sumber, lokasi Jalan Buluh Kubu, kategori barangan, makanan dan parkir di Kota Bharu.";
 
 const attractionJsonLd = buildAttraction({
   site,
@@ -55,12 +55,13 @@ const attractionJsonLd = buildAttraction({
   name: FACTS.name,
   alternateName: FACTS.alternateName,
   description:
-    'Pasar tradisional bertingkat di pusat Kota Bharu yang terkenal dengan ruang atrium oktagon, peniaga tempatan, hasil segar, makanan Kelantan dan barangan kraftangan.',
+    'Pasar tradisional bertingkat di pusat Kota Bharu yang terkenal dengan ruang atrium, peniaga tempatan, hasil segar, makanan Kelantan dan barangan kraftangan.',
 });
 
 const faqJsonLd = buildFaq(faqs);
 
 const nav = [
+  { href: '#directory', label: "Barangan" },
   { href: '#kenali', label: 'Kenali Pasar' },
   { href: '#makan', label: 'Makan' },
   { href: '#rancang', label: 'Rancang' },
@@ -93,7 +94,7 @@ const sekitar = [
   ['Pintu Gerbang Kota Sultan Ismail Petra', 'Mercu bandar yang mudah digabungkan dalam laluan pusat kota.'],
 ];
 ---
-<BaseLayout title="Pasar Siti Khadijah Kota Bharu | Waktu Operasi, Lokasi & Panduan" description={description}>
+<BaseLayout title="Pasar Siti Khadijah | Waktu Operasi, Lokasi & Makanan" description={description}>
   <script type="application/ld+json" is:inline set:html={JSON.stringify(attractionJsonLd)}></script>
   <script type="application/ld+json" is:inline set:html={JSON.stringify(faqJsonLd)}></script>
 
@@ -110,8 +111,8 @@ const sekitar = [
             <span class="h-2.5 w-2.5 rounded-full bg-[#f5b642]"></span>Kota Bharu · Kelantan
           </div>
           <p class="section-kicker mb-4 text-[#f5b642]">Pasar, rasa & cerita tempatan</p>
-          <h1 class="max-w-4xl text-5xl font-black leading-[.98] tracking-[-.045em] sm:text-6xl lg:text-8xl">Masuk ke jantung <span class="text-[#f5b642]">Kota Bharu.</span></h1>
-          <p class="mt-7 max-w-2xl text-lg leading-8 text-[#fff6e8]/85 sm:text-xl">Pasar Siti Khadijah bukan sekadar tempat membeli-belah. Ia ialah pengalaman berlapis — hasil segar di bawah, makanan dan barangan tempatan di aras atas, semuanya mengelilingi atrium oktagon yang menjadi imej ikonik pasar.</p>
+          <h1 class="max-w-4xl text-4xl font-black leading-tight tracking-[-.035em] sm:text-5xl lg:text-7xl">Pasar Siti Khadijah <span class="text-[#f5b642]">Kota Bharu</span></h1>
+          <p class="mt-7 max-w-2xl text-lg leading-8 text-[#fff6e8]/85 sm:text-xl">Pasar Siti Khadijah bukan sekadar tempat membeli-belah. Ia ialah pengalaman berlapis — hasil segar di bawah, makanan dan barangan tempatan di aras atas, semuanya mengelilingi atrium yang menjadi imej ikonik pasar.</p>
           <div class="mt-9 flex flex-wrap gap-3">
             <a href="#waktu" class="rounded-full bg-[#f5b642] px-6 py-3.5 font-black text-[#21372d] transition hover:-translate-y-0.5">Lihat waktu operasi</a>
             <a href="#makan" class="rounded-full border border-[#fff6e8]/40 bg-white/10 px-6 py-3.5 font-black backdrop-blur transition hover:bg-white/15">Cari rasa Kelantan</a>
@@ -131,30 +132,33 @@ const sekitar = [
           <div class="max-w-2xl">
             <p class="section-kicker text-[#6d966b]">Waktu operasi</p>
             <h2 class="mt-2 text-3xl font-black tracking-[-.03em] sm:text-4xl">Buka setiap hari · {FACTS.hours.display}</h2>
-            <p class="mt-3 leading-7 text-[#21372d]/72">Hari Jumaat lazimnya bermula sekitar 7:30 pagi dan aktiviti niaga perlahan kira-kira 12:00 tengah hari hingga 2:00 petang kerana solat Jumaat. {HOURS_NOTE}</p>
+            <p class="mt-3 leading-7 text-[#21372d]/72">Disemak 19 Oktober 2026: Google Maps menyenaraikan 07:30–17:30 setiap hari; Tourism Kelantan menyatakan 07:00–18:00. Waktu setiap gerai boleh berbeza. Sahkan dengan peniaga sebelum datang, terutama hari Jumaat dan cuti umum.</p>
           </div>
           <div class="flex flex-wrap gap-3">
             <a href={`tel:${FACTS.phone}`} class="rounded-full bg-[#21372d] px-5 py-3.5 font-extrabold text-[#fff6e8] transition hover:-translate-y-0.5">☎ Hubungi pasar</a>
             <a href={FACTS.mapLink} target="_blank" rel="noopener" class="rounded-full bg-[#f5b642] px-5 py-3.5 font-extrabold text-[#21372d] transition hover:-translate-y-0.5">Navigasi ke Jalan Buluh Kubu ↗</a>
           </div>
         </div>
+        <p class="mt-5 text-sm font-bold"><a class="underline" href={SOURCES.maps.url} target="_blank" rel="noopener">Rujukan Google Maps · disemak 2026-10-19</a> · <a class="underline" href={SOURCES.tourism.url} target="_blank" rel="noopener">Tourism Kelantan: 07:00–18:00</a></p>
         <dl class="mt-7 grid gap-3 sm:grid-cols-3">
-          <div class="card rounded-2xl p-4"><dt class="text-xs font-black uppercase tracking-[.16em] text-[#6d966b]">Isnin – Khamis</dt><dd class="mt-1 text-lg font-black">07:00 – 17:30</dd></div>
-          <div class="card rounded-2xl p-4"><dt class="text-xs font-black uppercase tracking-[.16em] text-[#7a3f68]">Jumaat</dt><dd class="mt-1 text-lg font-black">07:30 – 17:30</dd><dd class="mt-1 text-sm text-[#21372d]/65">Perlahan sekitar 12:00–14:00</dd></div>
-          <div class="card rounded-2xl p-4"><dt class="text-xs font-black uppercase tracking-[.16em] text-[#c84a3e]">Sabtu – Ahad</dt><dd class="mt-1 text-lg font-black">07:00 – 17:30</dd></div>
+          <div class="card rounded-2xl p-4"><dt class="text-xs font-black uppercase tracking-[.16em] text-[#6d966b]">Isnin – Khamis</dt><dd class="mt-1 text-lg font-black">{FACTS.hours.display}</dd></div>
+          <div class="card rounded-2xl p-4"><dt class="text-xs font-black uppercase tracking-[.16em] text-[#7a3f68]">Jumaat</dt><dd class="mt-1 text-lg font-black">{FACTS.hours.display}</dd></div>
+          <div class="card rounded-2xl p-4"><dt class="text-xs font-black uppercase tracking-[.16em] text-[#c84a3e]">Sabtu – Ahad</dt><dd class="mt-1 text-lg font-black">{FACTS.hours.display}</dd></div>
         </dl>
       </div>
     </section>
+
+    <section id="directory" class="mx-auto max-w-7xl px-5 py-12 lg:px-8"><h2 class="text-3xl font-black">Panduan barangan di pasar</h2><p class="mt-4 max-w-3xl leading-7">Panduan kategori untuk merancang lawatan; senarai penyewa dan nombor gerai terkini belum disahkan. Semak papan tanda atau tanya peniaga di lokasi.</p><div class="mt-6 grid gap-4 md:grid-cols-3"><article class="card rounded-2xl p-5"><h3 class="font-black">Hasil segar</h3><p class="mt-2 leading-7">Cari buah, sayur dan bahan masakan; bandingkan pilihan serta harga pada hari lawatan.</p></article><article class="card rounded-2xl p-5"><h3 class="font-black">Makanan Kelantan</h3><p class="mt-2 leading-7">Lihat nasi kerabu, kuih dan makanan kering; pilihan mengikut gerai yang dibuka.</p></article><article class="card rounded-2xl p-5"><h3 class="font-black">Kain & buah tangan</h3><p class="mt-2 leading-7">Cari kain, kraftangan dan barangan tempatan; sahkan bahan, saiz dan harga sebelum membeli.</p></article></div></section>
 
     <section id="kenali" class="market-grid py-20 lg:py-28">
       <div class="mx-auto max-w-7xl px-5 lg:px-8">
         <div class="grid items-center gap-14 lg:grid-cols-2">
           <div>
             <p class="section-kicker text-[#7a3f68]">Kenali pasar</p>
-            <h2 class="mt-3 text-4xl font-black tracking-[-.035em] sm:text-5xl">Oktagon yang penuh warna, suara dan aroma.</h2>
+            <h2 class="mt-3 text-4xl font-black tracking-[-.035em] sm:text-5xl">Ruang yang penuh warna, suara dan aroma.</h2>
             <p class="mt-6 text-lg leading-8 text-[#21372d]/75">Pasar bertingkat ini terkenal dengan pandangan dari aras atas ke ruang niaga di tengah. Susun atur terbuka menjadikan hasil segar, rempah, makanan kering, kain dan kraftangan terasa seperti satu pentas besar kehidupan harian Kota Bharu.</p>
             <div class="mt-8 grid gap-4 sm:grid-cols-3">
-              <div class="card rounded-3xl p-5"><div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[#f5b642] font-black">8</div><h3 class="font-black">Bentuk oktagon</h3><p class="mt-1 text-sm leading-6 text-[#21372d]/65">Motif seni bina yang memberi identiti tersendiri.</p></div>
+              <div class="card rounded-3xl p-5"><div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[#f5b642] font-black">◎</div><h3 class="font-black">Seni bina pasar</h3><p class="mt-1 text-sm leading-6 text-[#21372d]/65">Motif seni bina yang memberi identiti tersendiri.</p></div>
               <div class="card rounded-3xl p-5"><div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[#6d966b] text-xl">◒</div><h3 class="font-black">Berbilang aras</h3><p class="mt-1 text-sm leading-6 text-[#21372d]/65">Daripada hasil basah hingga barangan tempatan.</p></div>
               <div class="card rounded-3xl p-5"><div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[#c84a3e] text-xl text-white">✦</div><h3 class="font-black">Budaya niaga</h3><p class="mt-1 text-sm leading-6 text-[#21372d]/65">Peniaga wanita menjadi wajah yang kuat di pasar ini.</p></div>
             </div>
@@ -209,9 +213,9 @@ const sekitar = [
         <p class="section-kicker text-[#6d966b]">Rancang lawatan</p>
         <h2 class="mt-3 max-w-3xl text-4xl font-black tracking-[-.035em] sm:text-5xl">Maklumat praktikal, tanpa teka-teki.</h2>
         <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          <article class="card rounded-[2rem] p-6"><span class="text-3xl">◷</span><h3 class="mt-5 text-xl font-black">Waktu operasi</h3><p class="mt-2 leading-7 text-[#21372d]/70">Rujukan semasa: <strong>{FACTS.hours.display} setiap hari</strong> (Jumaat sekitar 07:30 pagi). Ada sumber menyenaraikan operasi sehingga 6:00 petang; semak papan tanda dan senarai peta sebelum bergerak.</p></article>
+          <article class="card rounded-[2rem] p-6"><span class="text-3xl">◷</span><h3 class="mt-5 text-xl font-black">Waktu operasi</h3><p class="mt-2 leading-7 text-[#21372d]/70">Rujukan semasa: <strong>{FACTS.hours.display} setiap hari</strong> (Google Maps). Tourism Kelantan menyatakan 07:00–18:00; semak papan tanda dan senarai peta sebelum bergerak.</p></article>
           <article class="card rounded-[2rem] p-6"><span class="text-3xl">RM</span><h3 class="mt-5 text-xl font-black">Tiket / bayaran</h3><p class="mt-2 leading-7 text-[#21372d]/70"><strong>Tiada tiket masuk lazimnya dikenakan.</strong> Bajet anda bergantung pada makanan dan belian. Harga setiap gerai berbeza; bawa tunai kecil.</p></article>
-          <article class="card rounded-[2rem] p-6"><span class="text-3xl">☀</span><h3 class="mt-5 text-xl font-black">Masa terbaik</h3><p class="mt-2 leading-7 text-[#21372d]/70"><strong>Awal pagi, 07:00–10:00</strong> ialah cadangan terbaik untuk suasana aktif, hasil segar dan keadaan yang lebih nyaman.</p></article>
+          <article class="card rounded-[2rem] p-6"><span class="text-3xl">☀</span><h3 class="mt-5 text-xl font-black">Masa terbaik</h3><p class="mt-2 leading-7 text-[#21372d]/70"><strong>Awal pagi, 08:00–10:00</strong> ialah cadangan terbaik untuk suasana aktif, hasil segar dan keadaan yang lebih nyaman.</p></article>
           <article class="card rounded-[2rem] p-6"><span class="text-3xl">⌛</span><h3 class="mt-5 text-xl font-black">Tempoh lawatan</h3><p class="mt-2 leading-7 text-[#21372d]/70">Peruntukkan <strong>1–2 jam</strong> untuk meneroka beberapa aras, makan dan membeli buah tangan tanpa tergesa-gesa.</p></article>
         </div>
 
@@ -296,7 +300,7 @@ const sekitar = [
       <div class="mx-auto max-w-7xl px-5 lg:px-8">
         <div class="rounded-[2rem] border border-[#21372d]/15 bg-white/50 p-6 text-sm leading-6 text-[#21372d]/62">
           <p class="font-black text-[#21372d]">Nota penilaian, foto & sumber</p>
-          <p class="mt-2">Penilaian {FACTS.rating.value}/5 daripada {FACTS.rating.count.toLocaleString('ms-MY')} ulasan diselaraskan daripada <a class="font-bold underline" href={SOURCES.maps.url} target="_blank" rel="noopener">{SOURCES.maps.label}</a> pada {FACTS.rating.synced}. Angka ini boleh berubah mengikut masa.</p>
+          <p class="mt-2">Penilaian {FACTS.rating.value}/5 daripada {FACTS.rating.count.toLocaleString('ms-MY')} ulasan disemak pada <a class="font-bold underline" href={SOURCES.maps.url} target="_blank" rel="noopener">{SOURCES.maps.label}</a> pada {FACTS.rating.synced}. Angka ini boleh berubah mengikut masa.</p>
           <p class="mt-2">Waktu operasi dirujuk daripada <a class="font-bold underline" href={SOURCES.hours.url} target="_blank" rel="noopener">{SOURCES.hours.label}</a> dan disemak silang dengan <a class="font-bold underline" href={SOURCES.tourism.url} target="_blank" rel="noopener">{SOURCES.tourism.label}</a>. Sahkan semula sebelum lawatan pada musim perayaan atau cuti umum.</p>
           <p class="mt-2">Foto sebenar diproses dan disimpan secara tempatan dalam projek. {photoCredits}</p>
         </div>

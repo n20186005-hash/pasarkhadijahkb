@@ -17,11 +17,11 @@ const { nav, cta, phoneLabel, langLabel } = Astro.props;
 const currentPath = Astro.url.pathname;
 ---
 <header class="sticky top-0 z-50 border-b border-[#21372d]/10 bg-[#fff6e8]/95 backdrop-blur">
-  <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3 lg:px-8">
+  <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 py-3 lg:px-8">
     <a href="#atas" class="shrink-0" aria-label="Pasar Siti Khadijah — ke atas">
-      <img src="/logo.svg" width="430" height="88" alt="Pasar Siti Khadijah, Kota Bharu" class="h-11 w-auto" />
+      <img src="/logo.svg" width="430" height="88" alt="Pasar Siti Khadijah, Kota Bharu" class="h-9 w-auto max-w-[190px] sm:h-11 sm:max-w-none" />
     </a>
-    <nav aria-label={nav[0] ? 'Navigasi utama' : 'Navigasi'} class="hidden items-center gap-5 text-sm font-bold lg:flex">
+    <nav aria-label={nav[0] ? 'Navigasi utama' : 'Navigasi'} class="hidden items-center gap-5 text-sm font-bold xl:flex">
       {
         nav.map((item) => (
           <a class="hover:text-[#c84a3e]" href={item.href}>
@@ -31,7 +31,7 @@ const currentPath = Astro.url.pathname;
       }
     </nav>
     <div class="flex items-center gap-2">
-      <nav aria-label={langLabel} class="hidden items-center gap-1 rounded-full border border-[#21372d]/15 bg-white/60 px-2 py-1 text-xs font-extrabold lg:flex">
+      <nav aria-label={langLabel} class="hidden items-center gap-1 rounded-full border border-[#21372d]/15 bg-white/60 px-2 py-1 text-xs font-extrabold xl:flex">
         {
           LOCALES.map((locale) => (
             <a
@@ -50,7 +50,7 @@ const currentPath = Astro.url.pathname;
       <a
         href={`tel:${FACTS.phone}`}
         aria-label={`${phoneLabel} ${FACTS.phoneDisplay}`}
-        class="flex h-11 w-11 items-center justify-center rounded-full bg-[#f5b642] text-xl text-[#21372d] transition hover:-translate-y-0.5 lg:hidden"
+        class="flex h-11 w-11 items-center justify-center rounded-full bg-[#f5b642] text-xl text-[#21372d] transition hover:-translate-y-0.5 xl:hidden"
         >☎</a
       >
       <a
@@ -62,4 +62,8 @@ const currentPath = Astro.url.pathname;
       >
     </div>
   </div>
+  <nav aria-label={langLabel} class="flex flex-wrap gap-x-5 gap-y-3 border-t border-[#21372d]/10 px-5 py-3 text-sm font-bold xl:hidden">
+    {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+    {LOCALES.map((locale) => <a href={locale.path} aria-current={locale.path === currentPath ? 'page' : undefined} class="underline">{locale.short}</a>)}
+  </nav>
 </header>

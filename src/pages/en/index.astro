@@ -10,15 +10,15 @@ const site = Astro.site;
 const faqs = [
   {
     q: 'What time does Siti Khadijah Market open?',
-    a: 'Reference hours are around 7:00 am every day, with Friday usually starting slightly later at about 7:30 am. The freshest produce is available early in the morning.',
+    a: "Google Maps, checked on 19 October 2026, lists 07:30 daily. Tourism Kelantan gives 07:00. Individual stalls may open at different times; confirm before setting off.",
   },
   {
     q: 'What time does the market close?',
-    a: 'Most stalls trade until roughly 5:30 pm, although a few sources list trading up to 6:00 pm. Towards the end of the day some traders start packing up, so arrive earlier for the full selection.',
+    a: "Google Maps lists 17:30, while Tourism Kelantan gives 18:00. Do not assume every stall remains open until the later time; check with the trader you plan to visit.",
   },
   {
     q: 'Is Siti Khadijah Market closed on any day?',
-    a: 'The market operates every day of the week, including Saturdays and Sundays, and has no fixed weekly closing day. On Fridays trading slows down between roughly 12:00 pm and 2:00 pm for Friday prayers.',
+    a: "Google Maps lists Monday through Sunday trading. Public holidays, Ramadan and trader breaks may affect individual stalls. A uniform Friday break time has not been verified.",
   },
   {
     q: 'Is there an entrance fee?',
@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     q: 'When is the best time to visit?',
-    a: 'Come between 7:00 am and 10:00 am for an active atmosphere, the widest choice of fresh produce and softer light in the octagonal atrium.',
+    a: "Consider visiting around 08:00–10:00 for the morning market. Stall availability and hours can vary.",
   },
   {
     q: 'How long should I allow?',
@@ -47,7 +47,7 @@ const faqs = [
 ];
 
 const description =
-  'Plan a visit to Siti Khadijah Market in Kota Bharu: reference opening hours 07:00-17:30 daily, Jalan Buluh Kubu location, phone +60 17-914 6218, Kelantan food, parking and nearby heritage sights.';
+  "Check Siti Khadijah Market opening and closing hours, conflicting listings, Jalan Buluh Kubu directions, food and shopping categories, and parking in Kota Bharu.";
 
 const attractionJsonLd = buildAttraction({
   site,
@@ -55,12 +55,13 @@ const attractionJsonLd = buildAttraction({
   name: 'Siti Khadijah Market Kota Bharu',
   alternateName: 'Pasar Siti Khadijah Kota Bharu',
   description:
-    'A multi-storey traditional market in Kota Bharu city centre known for its octagonal atrium, local traders, fresh produce, Kelantan food and handicraft stalls.',
+    'A multi-storey traditional market in Kota Bharu city centre known for its central atrium, local traders, fresh produce, Kelantan food and handicraft stalls.',
 });
 
 const faqJsonLd = buildFaq(faqs);
 
 const nav = [
+  { href: '#directory', label: "Directory" },
   { href: '#about', label: 'About' },
   { href: '#eat', label: 'Eat' },
   { href: '#plan', label: 'Plan' },
@@ -93,7 +94,7 @@ const around = [
   ['Sultan Ismail Petra City Gate', 'An easy-to-reach city landmark in downtown Kota Bharu.'],
 ];
 ---
-<BaseLayout lang="en" title="Siti Khadijah Market Kota Bharu | Opening Hours, Location & Guide" description={description}>
+<BaseLayout lang="en" title="Siti Khadijah Market | Opening Hours, Location & Food" description={description}>
   <script type="application/ld+json" is:inline set:html={JSON.stringify(attractionJsonLd)}></script>
   <script type="application/ld+json" is:inline set:html={JSON.stringify(faqJsonLd)}></script>
 
@@ -110,8 +111,8 @@ const around = [
             <span class="h-2.5 w-2.5 rounded-full bg-[#f5b642]"></span>Kota Bharu · Kelantan
           </div>
           <p class="section-kicker mb-4 text-[#f5b642]">Market, flavour & local stories</p>
-          <h1 class="max-w-4xl text-5xl font-black leading-[.98] tracking-[-.045em] sm:text-6xl lg:text-8xl">Step into the heart of <span class="text-[#f5b642]">Kota Bharu.</span></h1>
-          <p class="mt-7 max-w-2xl text-lg leading-8 text-[#fff6e8]/85 sm:text-xl">Siti Khadijah Market is more than a place to shop. It is a layered experience — wet produce on the ground floor, food and dry goods on the upper floors, all wrapped around the octagonal atrium that gives the building its signature look.</p>
+          <h1 class="max-w-4xl text-4xl font-black leading-tight tracking-[-.035em] sm:text-5xl lg:text-7xl">Siti Khadijah Market <span class="text-[#f5b642]">Kota Bharu</span></h1>
+          <p class="mt-7 max-w-2xl text-lg leading-8 text-[#fff6e8]/85 sm:text-xl">Siti Khadijah Market is more than a place to shop. It is a layered experience — wet produce on the ground floor, food and dry goods on the upper floors, all wrapped around the central atrium that gives the building its signature look.</p>
           <div class="mt-9 flex flex-wrap gap-3">
             <a href="#hours" class="rounded-full bg-[#f5b642] px-6 py-3.5 font-black text-[#21372d] transition hover:-translate-y-0.5">Check opening hours</a>
             <a href="#eat" class="rounded-full border border-[#fff6e8]/40 bg-white/10 px-6 py-3.5 font-black backdrop-blur transition hover:bg-white/15">Kelantan flavours</a>
@@ -131,30 +132,33 @@ const around = [
           <div class="max-w-2xl">
             <p class="section-kicker text-[#6d966b]">Opening hours</p>
             <h2 class="mt-2 text-3xl font-black tracking-[-.03em] sm:text-4xl">Open every day · {FACTS.hours.display}</h2>
-            <p class="mt-3 leading-7 text-[#21372d]/72">Fridays usually start a little later, around 7:30 am, and trading slows between roughly 12:00 pm and 2:00 pm for Friday prayers. Reference hours only; festive seasons, Ramadan, public holidays and upgrading works can change trading times.</p>
+            <p class="mt-3 leading-7 text-[#21372d]/72">Checked 19 October 2026: Google Maps lists 07:30–17:30 daily; Tourism Kelantan gives 07:00–18:00. Individual stall hours may differ. Confirm before travelling, especially on Fridays and public holidays.</p>
           </div>
           <div class="flex flex-wrap gap-3">
             <a href={`tel:${FACTS.phone}`} class="rounded-full bg-[#21372d] px-5 py-3.5 font-extrabold text-[#fff6e8] transition hover:-translate-y-0.5">☎ Call the market</a>
             <a href={FACTS.mapLink} target="_blank" rel="noopener" class="rounded-full bg-[#f5b642] px-5 py-3.5 font-extrabold text-[#21372d] transition hover:-translate-y-0.5">Navigate to Jalan Buluh Kubu ↗</a>
           </div>
         </div>
+        <p class="mt-5 text-sm font-bold"><a class="underline" href={SOURCES.maps.url} target="_blank" rel="noopener">Google Maps reference · checked 2026-10-19</a> · <a class="underline" href={SOURCES.tourism.url} target="_blank" rel="noopener">Tourism Kelantan: 07:00–18:00</a></p>
         <dl class="mt-7 grid gap-3 sm:grid-cols-3">
-          <div class="card rounded-2xl p-4"><dt class="text-xs font-black uppercase tracking-[.16em] text-[#6d966b]">Monday – Thursday</dt><dd class="mt-1 text-lg font-black">07:00 – 17:30</dd></div>
-          <div class="card rounded-2xl p-4"><dt class="text-xs font-black uppercase tracking-[.16em] text-[#7a3f68]">Friday</dt><dd class="mt-1 text-lg font-black">07:30 – 17:30</dd><dd class="mt-1 text-sm text-[#21372d]/65">Slower around 12:00–14:00</dd></div>
-          <div class="card rounded-2xl p-4"><dt class="text-xs font-black uppercase tracking-[.16em] text-[#c84a3e]">Saturday – Sunday</dt><dd class="mt-1 text-lg font-black">07:00 – 17:30</dd></div>
+          <div class="card rounded-2xl p-4"><dt class="text-xs font-black uppercase tracking-[.16em] text-[#6d966b]">Monday – Thursday</dt><dd class="mt-1 text-lg font-black">{FACTS.hours.display}</dd></div>
+          <div class="card rounded-2xl p-4"><dt class="text-xs font-black uppercase tracking-[.16em] text-[#7a3f68]">Friday</dt><dd class="mt-1 text-lg font-black">{FACTS.hours.display}</dd></div>
+          <div class="card rounded-2xl p-4"><dt class="text-xs font-black uppercase tracking-[.16em] text-[#c84a3e]">Saturday – Sunday</dt><dd class="mt-1 text-lg font-black">{FACTS.hours.display}</dd></div>
         </dl>
       </div>
     </section>
+
+    <section id="directory" class="mx-auto max-w-7xl px-5 py-12 lg:px-8"><h2 class="text-3xl font-black">Market shopping directory</h2><p class="mt-4 max-w-3xl leading-7">A category guide for planning your visit. A current tenant list and stall numbers have not been verified; check signs or ask traders when you arrive.</p><div class="mt-6 grid gap-4 md:grid-cols-3"><article class="card rounded-2xl p-5"><h3 class="font-black">Fresh produce</h3><p class="mt-2 leading-7">Look for fruit, vegetables and cooking ingredients; compare availability and prices on the day.</p></article><article class="card rounded-2xl p-5"><h3 class="font-black">Kelantan food</h3><p class="mt-2 leading-7">Browse nasi kerabu, traditional sweets and dried foods according to which stalls are open.</p></article><article class="card rounded-2xl p-5"><h3 class="font-black">Textiles & souvenirs</h3><p class="mt-2 leading-7">Look for fabrics, handicrafts and local goods; confirm materials, sizes and prices before buying.</p></article></div></section>
 
     <section id="about" class="market-grid py-20 lg:py-28">
       <div class="mx-auto max-w-7xl px-5 lg:px-8">
         <div class="grid items-center gap-14 lg:grid-cols-2">
           <div>
             <p class="section-kicker text-[#7a3f68]">About the market</p>
-            <h2 class="mt-3 text-4xl font-black tracking-[-.035em] sm:text-5xl">An octagon full of colour, sound and aroma.</h2>
+            <h2 class="mt-3 text-4xl font-black tracking-[-.035em] sm:text-5xl">An atrium full of colour, sound and aroma.</h2>
             <p class="mt-6 text-lg leading-8 text-[#21372d]/75">The lookout from the upper floors down into the trading floor is what this market is famous for. The open layout turns fresh produce, spices, dried goods, textiles and handicrafts into one big stage of daily life in Kota Bharu.</p>
             <div class="mt-8 grid gap-4 sm:grid-cols-3">
-              <div class="card rounded-3xl p-5"><div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[#f5b642] font-black">8</div><h3 class="font-black">Octagonal plan</h3><p class="mt-1 text-sm leading-6 text-[#21372d]/65">The architectural motif that gives it its identity.</p></div>
+              <div class="card rounded-3xl p-5"><div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[#f5b642] font-black">◎</div><h3 class="font-black">Market architecture</h3><p class="mt-1 text-sm leading-6 text-[#21372d]/65">The architectural motif that gives it its identity.</p></div>
               <div class="card rounded-3xl p-5"><div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[#6d966b] text-xl">◒</div><h3 class="font-black">Several floors</h3><p class="mt-1 text-sm leading-6 text-[#21372d]/65">From wet produce through to local dry goods.</p></div>
               <div class="card rounded-3xl p-5"><div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[#c84a3e] text-xl text-white">✦</div><h3 class="font-black">Trading culture</h3><p class="mt-1 text-sm leading-6 text-[#21372d]/65">Women traders are a strong feature of this market.</p></div>
             </div>
@@ -197,9 +201,9 @@ const around = [
         <p class="section-kicker text-[#6d966b]">Plan your visit</p>
         <h2 class="mt-3 max-w-3xl text-4xl font-black tracking-[-.035em] sm:text-5xl">Practical information, without guesswork.</h2>
         <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          <article class="card rounded-[2rem] p-6"><span class="text-3xl">◷</span><h3 class="mt-5 text-xl font-black">Opening hours</h3><p class="mt-2 leading-7 text-[#21372d]/70">Reference hours: <strong>{FACTS.hours.display} daily</strong> (Fridays around 07:30). Some listings show trading until 18:00, so check the map listing and on-site signage before you travel.</p></article>
+          <article class="card rounded-[2rem] p-6"><span class="text-3xl">◷</span><h3 class="mt-5 text-xl font-black">Opening hours</h3><p class="mt-2 leading-7 text-[#21372d]/70">Reference hours: <strong>{FACTS.hours.display} daily</strong> (Google Maps). Tourism Kelantan lists 07:00–18:00, so check the map listing and on-site signage before you travel.</p></article>
           <article class="card rounded-[2rem] p-6"><span class="text-3xl">RM</span><h3 class="mt-5 text-xl font-black">Tickets / payment</h3><p class="mt-2 leading-7 text-[#21372d]/70"><strong>No entrance ticket is normally charged.</strong> Your budget depends on food and shopping. Prices differ by stall, so carry small cash.</p></article>
-          <article class="card rounded-[2rem] p-6"><span class="text-3xl">☀</span><h3 class="mt-5 text-xl font-black">Best time</h3><p class="mt-2 leading-7 text-[#21372d]/70"><strong>Early morning, 07:00–10:00</strong>, offers the liveliest atmosphere, the freshest produce and cooler conditions.</p></article>
+          <article class="card rounded-[2rem] p-6"><span class="text-3xl">☀</span><h3 class="mt-5 text-xl font-black">Best time</h3><p class="mt-2 leading-7 text-[#21372d]/70"><strong>Early morning, 08:00–10:00</strong>, offers the liveliest atmosphere, the freshest produce and cooler conditions.</p></article>
           <article class="card rounded-[2rem] p-6"><span class="text-3xl">⌛</span><h3 class="mt-5 text-xl font-black">How long</h3><p class="mt-2 leading-7 text-[#21372d]/70">Allow <strong>1–2 hours</strong> to explore several floors, eat and buy souvenirs without rushing.</p></article>
         </div>
 
@@ -284,7 +288,7 @@ const around = [
       <div class="mx-auto max-w-7xl px-5 lg:px-8">
         <div class="rounded-[2rem] border border-[#21372d]/15 bg-white/50 p-6 text-sm leading-6 text-[#21372d]/62">
           <p class="font-black text-[#21372d]">Rating, photo & source notes</p>
-          <p class="mt-2">The {FACTS.rating.value}/5 rating from {FACTS.rating.count.toLocaleString('en-MY')} reviews was synchronised from <a class="font-bold underline" href={SOURCES.maps.url} target="_blank" rel="noopener">{SOURCES.maps.label}</a> in {FACTS.rating.synced}. The figure can change over time.</p>
+          <p class="mt-2">The {FACTS.rating.value}/5 rating from {FACTS.rating.count.toLocaleString('en-MY')} reviews was checked on <a class="font-bold underline" href={SOURCES.maps.url} target="_blank" rel="noopener">{SOURCES.maps.label}</a> on {FACTS.rating.synced}. The figure can change over time.</p>
           <p class="mt-2">Opening hours are referenced from <a class="font-bold underline" href={SOURCES.hours.url} target="_blank" rel="noopener">{SOURCES.hours.label}</a> and cross-checked with <a class="font-bold underline" href={SOURCES.tourism.url} target="_blank" rel="noopener">{SOURCES.tourism.label}</a>. Please confirm again before visiting during festive seasons or public holidays.</p>
           <p class="mt-2">All photos are processed and stored locally within the project. Photo credits: Marufish (CC BY-SA 2.0), yeowatzup (CC BY 2.0), CK Tan (CC BY 3.0).</p>
         </div>

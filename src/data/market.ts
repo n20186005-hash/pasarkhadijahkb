@@ -19,18 +19,18 @@ export const FACTS = {
   longitude: 102.23925,
   priceRange: 'RM',
   hours: {
-    opens: '07:00',
+    opens: '07:30',
     closes: '17:30',
     fridayOpens: '07:30',
-    display: '07:00–17:30',
+    display: '07:30–17:30',
   },
   rating: {
     value: 4.2,
-    count: 22311,
+    count: 22392,
     best: 5,
     worst: 1,
     source: 'Google Maps',
-    synced: 'September 2026',
+    synced: '2026-10-19',
   },
 };
 
@@ -38,7 +38,7 @@ export const HOURS_NOTE = 'Waktu operasi ialah rujukan; perayaan, Ramadan, cuti 
 
 export const SOURCES = {
   maps: { label: 'Google Maps — Pasar Siti Khadijah', url: FACTS.mapLink },
-  hours: { label: 'Waktu Operasi Pasar Siti Khadijah (waktuoperasi.my)', url: 'https://www.waktuoperasi.my/semenanjung-malaysia/waktu-operasi-pasar-siti-khadijah-kota-bharu/' },
+  hours: { label: 'Google Maps — waktu / hours (2026-10-19)', url: FACTS.mapLink },
   tourism: { label: 'Tourism Kelantan — Pasar Siti Khadijah', url: 'https://tourism.kelantan.my/index.php/pelancongan/pusat-membeli-belah/pasar-siti-khadijah' },
 };
 
