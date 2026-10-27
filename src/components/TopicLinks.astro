@@ -1,0 +1,76 @@
+---
+import {
+  TOPICS,
+  GROUP_LABELS,
+  GROUP_LABELS_MS,
+  GROUP_LABELS_ZH,
+  GROUP_ORDER,
+  type Topic,
+} from '../data/topics';
+import { getTopicMs } from '../data/topics.ms';
+import { getTopicZh } from '../data/topics.zh';
+
+interface Props {
+  lang?: 'en' | 'ms' | 'zh';
+}
+const { lang = 'en' } = Astro.props;
+const isMs = lang === 'ms';
+const isZh = lang === 'zh';
+
+const relBase = isZh ? '/zh/' : isMs ? '/' : '/en/';
+const groupLabels = isZh ? GROUP_LABELS_ZH : isMs ? GROUP_LABELS_MS : GROUP_LABELS;
+const topics: Topic[] = isZh
+  ? TOPICS.map((t) => getTopicZh(t.slug))
+  : isMs
+    ? TOPICS.map((t) => getTopicMs(t.slug))
+    : TOPICS;
+
+const copy = isZh
+  ? {
+      kicker: '访客指南',
+      h2: '38 篇聚焦指南，规划你的行程',
+      p: '除本页外，我们还发布关于西蒂卡迪嘉巴刹与哥打峇鲁的实用、非商业性指南，涵盖营业时间、美食、文化与行程路线。',
+    }
+  : isMs
+    ? {
+        kicker: 'Panduan pelawat',
+        h2: '38 panduan fokus untuk merancang lawatan',
+        p: 'Di luar halaman ini, kami menerbitkan panduan praktikal, bukan komersial mengenai waktu operasi, makanan, budaya dan itinerari di sekitar Pasar Siti Khadijah dan Kota Bharu.',
+      }
+    : {
+        kicker: 'Visitor guides',
+        h2: '38 focused guides to plan your visit',
+        p: 'Beyond this page, we publish practical, non-commercial guides on opening hours, food, culture and itineraries around Siti Khadijah Market and Kota Bharu.',
+      };
+---
+
+<section id="guides" class="market-grid">
+  <div class="mx-auto max-w-7xl px-5 py-12 lg:px-8 lg:py-16">
+    <p class="section-kicker text-[#6d966b]">{copy.kicker}</p>
+    <h2 class="mt-3 max-w-3xl text-4xl font-black tracking-[-.035em] sm:text-5xl">
+      {copy.h2}
+    </h2>
+    <p class="mt-4 max-w-3xl leading-7 text-[#21372d]/75">
+      {copy.p}
+    </p>
+
+    {
+      GROUP_ORDER.map((group) => (
+        <div class="mt-10">
+          <h3 class="text-xl font-black">{groupLabels[group]}</h3>
+          <div class="mt-4 grid gap-4 md:grid-cols-3">
+            {topics.filter((t) => t.group === group).map((t) => (
+              <a
+                href={`${relBase}${t.slug}/`}
+                class="card rounded-2xl p-5 transition hover:-translate-y-0.5"
+              >
+                <h4 class="font-black">{t.h1}</h4>
+                <p class="mt-2 text-sm leading-6 text-[#21372d]/70">{t.description}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

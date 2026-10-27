@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import TopicLinks from '../components/TopicLinks.astro';
 import { FACTS, SOURCES, photoCredits } from '../data/market';
 import { buildAttraction, buildFaq } from '../lib/schema';
 
@@ -66,12 +67,14 @@ const nav = [
   { href: '#makan', label: 'Makan' },
   { href: '#rancang', label: 'Rancang' },
   { href: '#sekitar', label: 'Sekitar' },
+  { href: '#guides', label: 'Panduan' },
   { href: '#faq', label: 'FAQ' },
 ];
 
 const footerLinks = [
   { href: '#atas', label: 'Atas ↑' },
   { href: '#waktu', label: 'Waktu operasi' },
+  { href: '#guides', label: 'Panduan pelawat' },
   { href: '#rancang', label: 'Rancang' },
   { href: '#faq', label: 'FAQ' },
 ];
@@ -306,6 +309,8 @@ const sekitar = [
         </div>
       </div>
     </section>
+
+    <TopicLinks lang="ms" />
   </main>
 
   <SiteFooter

@@ -55,3 +55,48 @@ export function buildFaq(faqs: { q: string; a: string }[]): JsonLd {
     })),
   };
 }
+
+export function buildBreadcrumb(
+  site: URL | undefined,
+  path: string,
+  name: string,
+  homeName = 'Home',
+  homePath = '/en/',
+): JsonLd {
+  const home = absUrl(site, homePath);
+  const here = absUrl(site, path);
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: homeName, ...(home ? { item: home } : {}) },
+      { '@type': 'ListItem', position: 2, name, ...(here ? { item: here } : {}) },
+    ],
+  };
+}
+
+export function buildWebPage(
+  site: URL | undefined,
+  path: string,
+  title: string,
+  description: string,
+  inLanguage = 'en-MY',
+  homePath = '/en/',
+): JsonLd {
+  const url = absUrl(site, path);
+  const home = absUrl(site, homePath);
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: title,
+    description,
+    ...(url ? { url, '@id': url } : {}),
+    isPartOf: { '@type': 'WebSite', name: 'Pasar Siti Khadijah Kota Bharu', ...(site ? { url: site.href } : {}) },
+    about: {
+      '@type': 'TouristAttraction',
+      name: FACTS.name,
+      ...(home ? { '@id': home } : {}),
+    },
+    inLanguage,
+  };
+}

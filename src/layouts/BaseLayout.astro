@@ -6,12 +6,30 @@ interface Props {
   title: string;
   description: string;
   lang?: string;
+  alternates?: Partial<Record<'ms' | 'en' | 'zh-Hans', string>>;
 }
 
-const { title, description, lang = 'ms' } = Astro.props;
+const { title, description, lang = 'ms', alternates } = Astro.props;
 const site = Astro.site;
 const canonical = site ? new URL(Astro.url.pathname, site).href : undefined;
 const ogImage = site ? new URL(ogImagePath, site).href : ogImagePath;
+
+type AltCode = 'ms' | 'en' | 'zh-Hans';
+const altHref = (code: AltCode): string => {
+  if (alternates && alternates[code]) {
+    return site ? new URL(alternates[code] as string, site).href : (alternates[code] as string);
+  }
+  const locale = LOCALES.find((l) => l.code === code);
+  return locale ? new URL(locale.path, site as URL).href : '/';
+};
+const enHref = altHref('en');
+const msHref = altHref('ms');
+const zhHref = altHref('zh-Hans');
+const xDefaultHref = alternates?.ms
+  ? site
+    ? new URL(alternates.ms, site).href
+    : alternates.ms
+  : new URL('/', site as URL).href;
 ---
 <!doctype html>
 <html lang={lang}>
@@ -26,10 +44,10 @@ const ogImage = site ? new URL(ogImagePath, site).href : ogImagePath;
     {
       site &&
         LOCALES.map((locale) => (
-          <link rel="alternate" hreflang={locale.code} href={new URL(locale.path, site).href} />
+          <link rel="alternate" hreflang={locale.code} href={altHref(locale.code as AltCode)} />
         ))
     }
-    {site && <link rel="alternate" hreflang="x-default" href={new URL('/', site).href} />}
+    {site && <link rel="alternate" hreflang="x-default" href={xDefaultHref} />}
     <meta property="og:type" content="website" />
     <meta property="og:locale" content={lang === 'en' ? 'en_MY' : lang === 'zh-Hans' ? 'zh_CN' : 'ms_MY'} />
     <meta property="og:site_name" content="Pasar Siti Khadijah Kota Bharu" />

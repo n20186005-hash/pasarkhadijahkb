@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
+import TopicLinks from '../../components/TopicLinks.astro';
 import { FACTS, SOURCES } from '../../data/market';
 import { buildAttraction, buildFaq } from '../../lib/schema';
 
@@ -66,12 +67,14 @@ const nav = [
   { href: '#eat', label: '美食' },
   { href: '#plan', label: '规划' },
   { href: '#around', label: '周边' },
+  { href: '#guides', label: '指南' },
   { href: '#faq', label: '常见问题' },
 ];
 
 const footerLinks = [
   { href: '#atas', label: '回到顶部 ↑' },
   { href: '#hours', label: '营业时间' },
+  { href: '#guides', label: '访客指南' },
   { href: '#plan', label: '行程规划' },
   { href: '#faq', label: '常见问题' },
 ];
@@ -294,6 +297,8 @@ const around = [
         </div>
       </div>
     </section>
+
+    <TopicLinks lang="zh" />
   </main>
 
   <SiteFooter

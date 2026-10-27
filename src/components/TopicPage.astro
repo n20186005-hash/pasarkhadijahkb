@@ -1,0 +1,272 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { buildFaq, buildBreadcrumb, buildWebPage } from '../lib/schema';
+import { FACTS, SOURCES } from '../data/market';
+import {
+  getTopic,
+  GROUP_LABELS,
+  GROUP_LABELS_MS,
+  GROUP_LABELS_ZH,
+  type Topic,
+} from '../data/topics';
+import { getTopicMs } from '../data/topics.ms';
+import { getTopicZh } from '../data/topics.zh';
+
+interface Props {
+  topic: Topic;
+  lang?: 'en' | 'ms' | 'zh';
+}
+const { topic, lang = 'en' } = Astro.props;
+const site = Astro.site;
+const isMs = lang === 'ms';
+const isZh = lang === 'zh';
+
+const path = isZh
+  ? `/zh/${topic.slug}/`
+  : isMs
+    ? `/${topic.slug}/`
+    : `/en/${topic.slug}/`;
+const enPath = `/en/${topic.slug}/`;
+const msPath = `/${topic.slug}/`;
+const zhPath = `/zh/${topic.slug}/`;
+
+const faqJsonLd = buildFaq(topic.faq);
+const breadcrumbJsonLd = buildBreadcrumb(
+  site,
+  path,
+  topic.h1,
+  isZh ? '首页' : isMs ? 'Utama' : 'Home',
+  isZh ? '/zh/' : isMs ? '/' : '/en/',
+);
+const webPageJsonLd = buildWebPage(
+  site,
+  path,
+  topic.title,
+  topic.description,
+  isZh ? 'zh-Hans' : isMs ? 'ms-MY' : 'en-MY',
+  isZh ? '/zh/' : isMs ? '/' : '/en/',
+);
+
+const groupLabels = isZh ? GROUP_LABELS_ZH : isMs ? GROUP_LABELS_MS : GROUP_LABELS;
+const relBase = isZh ? '/zh/' : isMs ? '/' : '/en/';
+const relatedTopics = topic.related
+  .map((slug) => (isZh ? getTopicZh(slug) : isMs ? getTopicMs(slug) : getTopic(slug)))
+  .filter(Boolean) as Topic[];
+
+const ui = isZh
+  ? {
+      nav: [
+        { href: '#overview', label: '概览' },
+        { href: '#guide', label: '指南' },
+        { href: '#related', label: '更多指南' },
+        { href: '#faq', label: '常见问题' },
+      ],
+      homeLink: '/zh/',
+      breadcrumbHome: '首页',
+      sourcesKicker: '来源与核实',
+      sourcesBody:
+        '本指南是一个独立的、非商业性的访客参考。营业时间、地点和市场信息均与公开列表及以下参考交叉核对；请在到访当天再次确认。',
+      moreKicker: '更多访客指南',
+      moreH1: '继续探索哥打峇鲁',
+      faqKicker: '常见问题',
+      faqH1: '出发前须知',
+      lastChecked: '核实于 ',
+      cta: '打开地图 ↗',
+      phoneLabel: '拨打电话',
+      langLabel: '语言',
+      mapLabel: '打开地图',
+      footerNote:
+        '一个独立、非商业性的哥打峇鲁与西蒂卡迪嘉巴刹访客指南。不与任何摊贩、店铺或预订服务有关联。',
+      footerLinks: [
+        { href: '#overview', label: '返回顶部 ↑' },
+        { href: '#faq', label: '常见问题' },
+        { href: '/zh/', label: '首页' },
+      ],
+    }
+  : isMs
+    ? {
+        nav: [
+          { href: '#overview', label: 'Gambaran' },
+          { href: '#guide', label: 'Panduan' },
+          { href: '#related', label: 'Lagi panduan' },
+          { href: '#faq', label: 'Soalan' },
+        ],
+        homeLink: '/',
+        breadcrumbHome: 'Utama',
+        sourcesKicker: 'Sumber & semakan',
+        sourcesBody:
+          'Panduan ini ialah rujukan pelawat bebas, bukan komersial. Waktu, lokasi dan fakta pasar disemak silang dengan senarai awam dan rujukan berikut; sentiasa sahkan pada hari lawatan.',
+        moreKicker: 'Lagi panduan pelawat',
+        moreH1: 'Terus terokai Kota Bharu',
+        faqKicker: 'Soalan Lazim',
+        faqH1: 'Sebelum anda pergi',
+        lastChecked: 'Disemak: ',
+        cta: 'Buka Peta ↗',
+        phoneLabel: 'Hubungi',
+        langLabel: 'Pilihan bahasa',
+        mapLabel: 'Buka Peta',
+        footerNote:
+          'Panduan pelawat bebas, bukan komersial ke Pasar Siti Khadijah dan Kota Bharu. Tidak berkait dengan mana-mana vendor, gerai atau perkhidmatan tempahan.',
+        footerLinks: [
+          { href: '#overview', label: 'Atas ↑' },
+          { href: '#faq', label: 'Soalan' },
+          { href: '/', label: 'Utama' },
+        ],
+      }
+    : {
+        nav: [
+          { href: '#overview', label: 'Overview' },
+          { href: '#guide', label: 'Guide' },
+          { href: '#related', label: 'More guides' },
+          { href: '#faq', label: 'FAQ' },
+        ],
+        homeLink: '/en/',
+        breadcrumbHome: 'Home',
+        sourcesKicker: 'Sources & verification',
+        sourcesBody:
+          'This guide is an independent, non-commercial visitor reference. Hours, location and market facts are cross-checked against public listings and the following references; always confirm on the day of your visit.',
+        moreKicker: 'More visitor guides',
+        moreH1: 'Keep exploring Kota Bharu',
+        faqKicker: 'FAQ · Frequently asked questions',
+        faqH1: 'Before you go',
+        lastChecked: 'Last checked: ',
+        cta: 'Open map ↗',
+        phoneLabel: 'Call',
+        langLabel: 'Language',
+        mapLabel: 'Open map',
+        footerNote:
+          'An independent, non-commercial visitor guide to Siti Khadijah Market and Kota Bharu. Not affiliated with any vendor, stall or booking service.',
+        footerLinks: [
+          { href: '#overview', label: 'Top ↑' },
+          { href: '#faq', label: 'FAQ' },
+          { href: '/en/', label: 'Home' },
+        ],
+      };
+---
+
+<BaseLayout
+  title={topic.title}
+  description={topic.description}
+  lang={lang}
+  alternates={{ en: enPath, ms: msPath, 'zh-Hans': zhPath }}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(webPageJsonLd)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+
+  <SiteHeader nav={ui.nav} cta={ui.cta} phoneLabel={ui.phoneLabel} langLabel={ui.langLabel} />
+
+  <main id="atas">
+    <section class="market-grid">
+      <div class="mx-auto max-w-7xl px-5 py-12 lg:px-8 lg:py-16">
+        <nav aria-label="Breadcrumb" class="text-sm font-bold text-[#21372d]/55">
+          <a href={ui.homeLink} class="hover:text-[#c84a3e]">{ui.breadcrumbHome}</a>
+          <span class="px-2">/</span>
+          <span>{groupLabels[topic.group]}</span>
+          <span class="px-2">/</span>
+          <span class="text-[#21372d]">{topic.h1}</span>
+        </nav>
+        <p class="section-kicker mt-6 text-[#c84a3e]">{groupLabels[topic.group]}</p>
+        <h1 class="mt-3 max-w-4xl text-4xl font-black leading-[1.05] tracking-[-.03em] sm:text-5xl lg:text-6xl">
+          {topic.h1}
+        </h1>
+        <p class="mt-5 max-w-3xl text-lg leading-8 text-[#21372d]/75">{topic.intro}</p>
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm font-bold">
+          <a
+            href={FACTS.mapLink}
+            target="_blank"
+            rel="noopener"
+            class="rounded-full bg-[#21372d] px-4 py-2.5 text-[#fff6e8] transition hover:-translate-y-0.5"
+            >{ui.mapLabel} ↗</a
+          >
+          <a
+            href={`tel:${FACTS.phone}`}
+            class="rounded-full bg-[#f5b642] px-4 py-2.5 text-[#21372d] transition hover:-translate-y-0.5"
+            >☎ {ui.phoneLabel} {FACTS.phoneDisplay}</a
+          >
+          <span class="text-[#21372d]/55">{ui.lastChecked}{topic.updated}</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="guide" class="mx-auto max-w-7xl px-5 py-10 lg:px-8">
+      <div class="grid gap-5 md:grid-cols-2">
+        {
+          topic.sections.map((section) => (
+            <article id={section.id} class="card rounded-2xl p-6">
+              <h2 class="text-xl font-black">{section.heading}</h2>
+              <p class="mt-3 leading-7 text-[#21372d]/80">{section.body}</p>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="mt-8 card rounded-2xl p-6">
+        <p class="section-kicker text-[#6d966b]">{ui.sourcesKicker}</p>
+        <p class="mt-3 leading-7 text-[#21372d]/80">{ui.sourcesBody}</p>
+        <ul class="mt-4 flex flex-wrap gap-3 text-sm font-bold">
+          {
+            [SOURCES.maps, SOURCES.tourism].map((s) => (
+              <li>
+                <a
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener"
+                  class="rounded-full border border-[#21372d]/20 bg-white/60 px-3 py-1.5 hover:text-[#c84a3e]"
+                >
+                  {s.label} ↗
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    {
+      relatedTopics.length > 0 && (
+        <section id="related" class="mx-auto max-w-7xl px-5 py-10 lg:px-8">
+          <p class="section-kicker text-[#7a3f68]">{ui.moreKicker}</p>
+          <h2 class="mt-3 text-3xl font-black tracking-[-.03em]">{ui.moreH1}</h2>
+          <div class="mt-6 grid gap-4 md:grid-cols-3">
+            {relatedTopics.map((t) => (
+              <a href={`${relBase}${t.slug}/`} class="card rounded-2xl p-5 transition hover:-translate-y-0.5">
+                <p class="section-kicker text-[#c84a3e]">{groupLabels[t.group]}</p>
+                <h3 class="mt-2 font-black">{t.h1}</h3>
+                <p class="mt-2 text-sm leading-6 text-[#21372d]/70">{t.description}</p>
+              </a>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <section id="faq" class="mx-auto max-w-3xl px-5 py-10 lg:px-8">
+      <p class="section-kicker text-[#c84a3e]">{ui.faqKicker}</p>
+      <h2 class="mt-3 text-3xl font-black tracking-[-.03em] sm:text-4xl">{ui.faqH1}</h2>
+      <div class="mt-6 divide-y divide-[#21372d]/10 rounded-2xl border border-[#21372d]/12 bg-white/55">
+        {
+          topic.faq.map((item) => (
+            <details class="group p-5">
+              <summary class="flex cursor-pointer items-center justify-between font-black">
+                <span>{item.q}</span>
+                <span class="ml-4 text-[#c84a3e] transition group-open:rotate-45">+</span>
+              </summary>
+              <p class="mt-3 leading-7 text-[#21372d]/80">{item.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter
+    note={ui.footerNote}
+    langLabel={ui.langLabel}
+    mapLabel={ui.mapLabel}
+    phoneLabel={ui.phoneLabel}
+    links={ui.footerLinks}
+  />
+</BaseLayout>

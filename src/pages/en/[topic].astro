@@ -1,0 +1,17 @@
+---
+import TopicPage from '../../components/TopicPage.astro';
+import { TOPICS } from '../../data/topics';
+
+export const dynamicParams = false;
+
+export function getStaticPaths() {
+  return TOPICS.map((topic) => ({
+    params: { topic: topic.slug },
+    props: { topic, lang: 'en' as const },
+  }));
+}
+
+const { topic, lang } = Astro.props;
+---
+
+<TopicPage topic={topic} lang={lang} />
